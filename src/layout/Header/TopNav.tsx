@@ -14,13 +14,9 @@ import { FaMedium } from "react-icons/fa";
 import NextLink from "next/link";
 import { ThemeModeToggler } from "@/components/ui/ThemeModeToggler";
 import { SOCIAL } from "@/config/social";
+import { NAV } from "@/config/nav";
 import { layoutDimensions } from "../dimensions";
 
-const links = [
-	{ label: "Home", path: "/" },
-	{ label: "About", path: "/about" },
-	{ label: "Contact", path: `mailto:${process.env.PERSONAL_EMAIL}` },
-];
 
 const socialIcons = [
 	{ href: SOCIAL.MEDIUM_ACCOUNT_URL, ariaLabel: "Medium Account", icon: <FaMedium /> },
@@ -74,7 +70,7 @@ export const TopNav = () => {
 					variant="ghost"
 				/>
 				<HStack as="nav" spacing={12} display={{ base: "none", md: "flex" }}>
-					{links.map((link, index) => (
+					{NAV.map((link, index) => (
 						<NavLink key={index} label={link.label} path={link.path} onClose={onClose} />
 					))}
 				</HStack>
