@@ -1,16 +1,4 @@
-import {
-	Button,
-	Badge,
-	Box,
-	Heading,
-	HStack,
-	Text,
-	Image,
-	VStack,
-	BadgeProps,
-	useColorModeValue,
-	useDisclosure,
-} from "@chakra-ui/react";
+import { Button, Badge, Box, Heading, HStack, Text, Image, VStack, BadgeProps, useDisclosure } from "@chakra-ui/react";
 import { FiLayers } from "react-icons/fi";
 import { CardTransition } from "@/components/ui/animation/Transitions";
 import { ProjectsListItemModal } from "./Modal";
@@ -56,7 +44,6 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 
 	const tags = sliceItems([...frameworks, ...libraries, ...languages], 4);
 
-	const descriptionColor = useColorModeValue("gray.600", "gray.300");
 	return (
 		<CardTransition order={order}>
 			<Box maxW="md" p="4" textAlign="center">
@@ -90,7 +77,7 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 							{tags.remainingItems && <Tag>{tags.remainingItems}+</Tag>}
 						</HStack>
 					</VStack>
-					<Text color={descriptionColor} pt="2">
+					<Text variant="lighter" pt="2">
 						{description}
 					</Text>
 					<Button

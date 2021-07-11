@@ -11,18 +11,13 @@ export const Hero = () => (
 				src={useColorModeValue("assets/images/memoji-victory.png", "assets/images/memoji-thumbs-up.png")}
 				bg="transparent"
 			/>
-			<Text
-				fontSize="xl"
-				fontWeight="medium"
-				color={useColorModeValue("blackAlpha.900", "whiteAlpha.900")}
-				lineHeight="shorter"
-			>
+			<Text fontSize="xl" fontWeight="medium" variant="light" lineHeight="shorter">
 				👋🏻 Hi, I&apos;m Bassem.
 			</Text>
 			<Heading as="h2" size="xl" maxWidth="xl" lineHeight="shorter">
 				I build <span className="underline">sophisticated</span> websites and web applications.
 			</Heading>
-			<Text fontSize="md" maxWidth="lg" color={useColorModeValue("gray.600", "gray.300")} lineHeight="base">
+			<Text fontSize="md" maxWidth="lg" variant="light" lineHeight="base">
 				I’m a freelance designer and developer. I help companies ship quality software for happy customers.
 				Let&apos;s celebrate your success together!
 			</Text>
@@ -30,7 +25,7 @@ export const Hero = () => (
 				<Button rightIcon={<FiArrowRight />}>See my projects</Button>
 			</NextLink>
 			<NextLink href="/about">
-				<Button variant="link" size="sm" color={useColorModeValue("blackAlpha.900", "whiteAlpha.900")}>
+				<Button variant="link" size="sm">
 					More about me
 				</Button>
 			</NextLink>
