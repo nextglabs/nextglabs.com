@@ -1,6 +1,16 @@
-import { IconButton, useColorModeValue, Menu, MenuButton, MenuList, MenuItem, MenuItemProps } from "@chakra-ui/react";
+import {
+	IconButton,
+	useColorModeValue,
+	Menu,
+	MenuButton,
+	MenuList,
+	MenuItem,
+	MenuItemProps,
+	VStack,
+} from "@chakra-ui/react";
 import { FiMenu, FiX } from "react-icons/fi";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import { NAV } from "@/config/nav";
 
 interface NavMenuButtonProps extends MenuItemProps {
@@ -9,19 +19,32 @@ interface NavMenuButtonProps extends MenuItemProps {
 	href: string;
 }
 
-const NavMenuButton = ({ label, href, ...restProps }: NavMenuButtonProps) => (
-	<NextLink href={href}>
-		<MenuItem borderRadius="6" {...restProps}>
-			{label}
-		</MenuItem>
-	</NextLink>
-);
+const NavMenuButton = ({ label, href, ...restProps }: NavMenuButtonProps) => {
+	const router = useRouter();
+	const isCurrent = router.asPath === href;
+	return (
+		<NextLink href={href}>
+			<MenuItem
+				borderRadius="6"
+				isDisabled={isCurrent}
+				isFocusable={!isCurrent}
+				fontWeight={isCurrent && "medium"}
+				_hover={{
+					cursor: isCurrent ? "initial" : "pointer",
+				}}
+				{...restProps}
+			>
+				{label}
+			</MenuItem>
+		</NextLink>
+	);
+};
 
 export const MobileMenu = () => {
 	const menuBorderColor = useColorModeValue("cyan.100", "cyan.200");
 	const menuBgColor = useColorModeValue("", "gray.900");
 	return (
-		<Menu isLazy>
+		<Menu isLazy autoSelect={false}>
 			{({ isOpen }) => (
 				<>
 					<MenuButton
@@ -33,15 +56,18 @@ export const MobileMenu = () => {
 						variant="ghost"
 					/>
 					<MenuList
+						boxShadow="md"
 						borderWidth="2px"
 						borderColor={menuBorderColor}
 						bgColor={menuBgColor}
 						p="3"
 						borderRadius="12"
 					>
-						{NAV.map((item, index) => (
-							<NavMenuButton key={index} {...item} />
-						))}
+						<VStack spacing="1">
+							{NAV.map((item, index) => (
+								<NavMenuButton key={index} {...item} />
+							))}
+						</VStack>
 					</MenuList>
 				</>
 			)}
