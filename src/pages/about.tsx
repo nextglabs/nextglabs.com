@@ -1,8 +1,8 @@
-import { SOCIAL } from "@/config/social";
-import { Button, Center, Image, Text, Box, Heading, Link, VStack, HStack } from "@chakra-ui/react";
-import React from "react";
+import { Button, Center, Text, Box, Heading, Link, VStack, HStack } from "@chakra-ui/react";
 import { AiFillMediumSquare } from "react-icons/ai";
 import { FiGithub } from "react-icons/fi";
+import { SOCIAL } from "@/config/social";
+import { Memoji } from "@/components/Memoji";
 
 const Index = () => (
 	<Center>
@@ -30,7 +30,7 @@ const Index = () => (
 						when I got my first job as an airline First Officer. I now fly for one of the biggest airlines
 						in Europe.
 					</Text>
-					<Image maxW="28" src="assets/images/memoji-pilot.png" alt="airline-pilot-memoji" />
+					<Memoji src="assets/images/memoji-pilot.png" />
 				</HStack>
 				<Heading as="h3" size="md" my="12">
 					<span className="underline">Open-Source</span>

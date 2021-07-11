@@ -1,6 +1,6 @@
 import { Button, Badge, Box, Heading, HStack, Text, Image, VStack, BadgeProps, useDisclosure } from "@chakra-ui/react";
 import { FiLayers } from "react-icons/fi";
-import { CardTransition } from "@/components/ui/animation/Transitions";
+import { SlideUpTransition } from "@/components/ui/animation/Transitions";
 import { ProjectsListItemModal } from "./Modal";
 import { ProjectLinks } from "./Links";
 import { Project } from "../../types";
@@ -45,7 +45,7 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 	const tags = sliceItems([...frameworks, ...libraries, ...languages], 4);
 
 	return (
-		<CardTransition order={order}>
+		<SlideUpTransition order={order}>
 			<Box maxW="md" p="4" textAlign="center">
 				<VStack spacing="2">
 					<Image
@@ -93,6 +93,6 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 					<ProjectLinks urls={{ githubUrl, liveUrl }} />
 				</VStack>
 			</Box>
-		</CardTransition>
+		</SlideUpTransition>
 	);
 };

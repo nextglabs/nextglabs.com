@@ -17,7 +17,7 @@ const dynamicOrderVariants = {
 	hidden: { opacity: 0, translateY: 50 },
 };
 
-export const CardTransition = ({ children, order }) => {
+export const SlideUpTransition = ({ children, order = 0 }) => {
 	const [ref, inView] = useInView();
 	const controls = useAnimation();
 

@@ -1,16 +1,12 @@
 import NextLink from "next/link";
-import { Avatar, Button, VStack, Heading, Text, Center, useColorModeValue } from "@chakra-ui/react";
+import { Button, VStack, Heading, Text, Center, useColorModeValue } from "@chakra-ui/react";
 import { FiArrowRight } from "react-icons/fi";
+import { Memoji } from "@/components/Memoji";
 
 export const Hero = () => (
 	<Center>
 		<VStack spacing="6" textAlign="center" mb="16">
-			<Avatar
-				name="✌"
-				size="2xl"
-				src={useColorModeValue("assets/images/memoji-victory.png", "assets/images/memoji-thumbs-up.png")}
-				bg="transparent"
-			/>
+			<Memoji src={useColorModeValue("assets/images/memoji-victory.png", "assets/images/memoji-thumbs-up.png")} />
 			<Text fontSize="xl" fontWeight="medium" variant="light" lineHeight="shorter">
 				👋🏻 Hi, I&apos;m Bassem.
 			</Text>
