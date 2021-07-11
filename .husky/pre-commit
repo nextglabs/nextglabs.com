@@ -1,0 +1,23 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo '🏗️👷 Styling, linting & testing before committing.'
+
+# Check Prettier standards
+yarn lint:all ||
+(
+        echo '😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤 
+                Types or Lint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+        false; 
+)
+
+# Test Code
+yarn test || 
+(
+    echo '🤡😂❌🤡 Failed Tests. 🤡😂❌🤡
+            Are you seriously trying to break me? Fix your code, now!'
+    false;
+)
+
+# If everything passes... Now we can commit
+echo '✅ Committing...'

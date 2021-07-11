@@ -1,43 +1,46 @@
 {
-  "name": "with-chakra-ui-typescript",
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "lint:style": "next lint",
-    "lint:types": "tsc --noEmit",
-    "lint:all": "npm-run-all -p lint:style lint:types"
-  },
-  "dependencies": {
-    "@chakra-ui/icons": "^1.0.5",
-    "@chakra-ui/react": "^1.4.2",
-    "@chakra-ui/theme-tools": "1.1.2",
-    "@emotion/react": "11.1.5",
-    "@emotion/styled": "11.1.5",
-    "framer-motion": "^4.1.17",
-    "graphql": "^15.5.1",
-    "graphql-request": "^3.4.0",
-    "next": "latest",
-    "next-seo": "^4.26.0",
-    "pluralize": "^8.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.2.0",
-    "react-intersection-observer": "^8.32.0",
-    "swr": "^0.5.6",
-    "use-sound": "^4.0.1"
-  },
-  "devDependencies": {
-    "@types/node": "^14.6.0",
-    "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.3",
-    "eslint": "^7.30.0",
-    "eslint-config-next": "^11.0.1",
-    "globby": "^11.0.4",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.3.2",
-    "typescript": "4.3.2"
-  },
-  "license": "MIT"
+	"name": "with-chakra-ui-typescript",
+	"version": "1.0.0",
+	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"start": "next start",
+		"lint:style": "next lint",
+		"lint:types": "tsc --noEmit",
+		"lint:all": "npm-run-all -p lint:style lint:types",
+		"test": "echo \"Error: no test specified\" && exit 0",
+		"prepare": "husky install"
+	},
+	"dependencies": {
+		"@chakra-ui/icons": "^1.0.5",
+		"@chakra-ui/react": "^1.4.2",
+		"@chakra-ui/theme-tools": "1.1.2",
+		"@emotion/react": "11.1.5",
+		"@emotion/styled": "11.1.5",
+		"framer-motion": "^4.1.17",
+		"graphql": "^15.5.1",
+		"graphql-request": "^3.4.0",
+		"next": "latest",
+		"next-seo": "^4.26.0",
+		"pluralize": "^8.0.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-icons": "^4.2.0",
+		"react-intersection-observer": "^8.32.0",
+		"swr": "^0.5.6",
+		"use-sound": "^4.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "^14.6.0",
+		"@types/react": "^17.0.3",
+		"@types/react-dom": "^17.0.3",
+		"eslint": "^7.30.0",
+		"eslint-config-next": "^11.0.1",
+		"globby": "^11.0.4",
+		"npm-run-all": "^4.1.5",
+		"prettier": "^2.3.2",
+		"typescript": "4.3.2",
+		"husky": "^7.0.0"
+	},
+	"license": "MIT"
 }
