@@ -3,4 +3,5 @@ export const fetcher = (query: string) => request(process.env.NEXT_PUBLIC_GRAPHC
 
 export const swrConfigOptions = {
 	fetcher,
+	dedupingInterval: 120000, // 2mn
 };
