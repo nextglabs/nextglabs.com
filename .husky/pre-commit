@@ -1,22 +1,13 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo '🏗️👷 Styling, linting & testing before committing.'
+echo '🏗️👷 Fixing autofixable ESLint errors/warnings.'
 
-# Check Prettier standards
-yarn lint:all ||
+yarn lint:fix || 
 (
-        echo '😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤 
+     echo '😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤 
                 Types or Lint Check Failed. Make the required changes listed above, add changes and try to commit again.'
-        false; 
-)
-
-# Test Code
-yarn test || 
-(
-    echo '🤡😂❌🤡 Failed Tests. 🤡😂❌🤡
-            Are you seriously trying to break me? Fix your code, now!'
-    false;
+    false; 
 )
 
 # If everything passes... Now we can commit
