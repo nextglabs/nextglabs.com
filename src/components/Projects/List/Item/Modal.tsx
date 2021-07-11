@@ -16,7 +16,7 @@ import {
 import { FiGlobe, FiSettings, FiCodesandbox, FiDatabase } from "react-icons/fi";
 import pluralize from "pluralize";
 import { ProjectLinks } from "./Links";
-import { ProjectUrls, Stack } from "../../types";
+import { Project } from "../../types";
 
 const isMulti = (array: string[]) => array.length > 1;
 const formatTitle = (title: string, array: string[]) => (isMulti(array) ? pluralize(title) : title);
@@ -32,13 +32,10 @@ const formatItems = (array: string[]) =>
 		</HStack>
 	));
 
-interface ProjectsListItemModalProps extends UseDisclosureProps {
-	stack: Stack;
-	urls: ProjectUrls;
-}
+type ProjectsListItemModalProps = UseDisclosureProps & Project;
 
-export const ProjectsListItemModal = ({ isOpen, onClose, stack, urls }: ProjectsListItemModalProps) => {
-	const { languages, frameworks, libraries, databases } = stack || {};
+export const ProjectsListItemModal = (props: ProjectsListItemModalProps) => {
+	const { isOpen, onClose, languages, frameworks, libraries, databases, title, githubUrl, liveUrl } = props;
 
 	const tree = {
 		languages: {
@@ -81,7 +78,7 @@ export const ProjectsListItemModal = ({ isOpen, onClose, stack, urls }: Projects
 		>
 			<ModalOverlay />
 			<ModalContent m="2" bgColor={modalBgColor}>
-				<ModalHeader>Portfolio</ModalHeader>
+				<ModalHeader>{title}</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody>
 					<VStack spacing="4" align="left">
@@ -100,7 +97,7 @@ export const ProjectsListItemModal = ({ isOpen, onClose, stack, urls }: Projects
 					</VStack>
 				</ModalBody>
 				<ModalFooter textAlign="center">
-					<ProjectLinks urls={urls} shortLabels={false} />
+					<ProjectLinks urls={{ githubUrl, liveUrl }} shortLabels={false} />
 				</ModalFooter>
 			</ModalContent>
 		</Modal>

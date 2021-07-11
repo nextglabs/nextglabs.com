@@ -37,13 +37,11 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 			languages = [],
 			frameworks = [],
 			libraries = [],
-			databases = [],
 			categories = [],
 		} = {},
 		order = 0,
 	} = props;
-	const stack = { languages, frameworks, libraries, databases };
-	const urls = { liveUrl, githubUrl };
+
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [play] = useSound("assets/audio/menu-open-sound.mp3", { volume: 0.25 });
 
@@ -104,13 +102,8 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 					>
 						Stack
 					</Button>
-					<ProjectsListItemModal
-						isOpen={isOpen}
-						onClose={() => handleModalToggle("close")}
-						stack={stack}
-						urls={urls}
-					/>
-					<ProjectLinks urls={urls} />
+					<ProjectsListItemModal isOpen={isOpen} onClose={() => handleModalToggle("close")} {...props.data} />
+					<ProjectLinks urls={{ githubUrl, liveUrl }} />
 				</VStack>
 			</Box>
 		</CardTransition>
