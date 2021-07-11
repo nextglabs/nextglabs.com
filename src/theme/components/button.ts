@@ -17,5 +17,11 @@ export const Button = {
 				transition: "all 0.3 cubic-bezier(0.65,0.05,0.36,1)"
 			},
 		}),
+		link: {
+			fontWeight: "medium"
+		}, 
+		ghost: {
+			fontWeight: "medium"
+		}
 	},
 };

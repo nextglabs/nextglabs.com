@@ -6,7 +6,7 @@ import { styles } from "./styles";
 // Global fonts overrides
 import { fonts } from "./fonts";
 // Component style overrides
-import { Button } from "./components/button";
+import { Button, Link } from "./components";
 
 const overrides = {
 	config,
@@ -14,7 +14,7 @@ const overrides = {
 	fonts,
 	components: {
 		Button,
-		// Other components go here
+		Link,
 	},
 };
 
