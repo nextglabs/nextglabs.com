@@ -1,4 +1,4 @@
-const url = process.env.SITE_URL;
+const url = process.env.NEXT_PUBLIC_SITE_URL;
 const title = "Bassem Allani – Software Engineer and Content Creator";
 const description = "FullStack Software Engineer who loves to teach and create innovative solutions.";
 

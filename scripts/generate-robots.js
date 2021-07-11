@@ -7,7 +7,7 @@ const fs = require("fs");
 (async () => {
 	const robots = `
     # AUTOMATICALLY GENERATED, DO NOT EDIT
-    Sitemap: ${process.env.SITE_URL}/sitemap.xml
+    Sitemap: ${process.env.NEXT_PUBLIC_SITE_URL}/sitemap.xml
 
     User-agent: *
     Allow: /*

@@ -21,7 +21,7 @@ const pagesPath = "./src/pages";
 				const route = path === "/index" ? "" : path;
 				return `
                     <url>
-                        <loc>${`${process.env.SITE_URL}${route}`}</loc>
+                        <loc>${`${process.env.NEXT_PUBLIC_SITE_URL}${route}`}</loc>
                     </url>
                 `;
 			})
