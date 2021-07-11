@@ -13,16 +13,18 @@ import { FiGithub, FiMenu, FiX } from "react-icons/fi";
 import { FaMedium } from "react-icons/fa";
 import NextLink from "next/link";
 import { ThemeModeToggler } from "@/components/ui/ThemeModeToggler";
+import { SOCIAL } from "@/config/social";
+import { layoutDimensions } from "../dimensions";
 
 const links = [
 	{ label: "Home", path: "/" },
 	{ label: "About", path: "/about" },
-	{ label: "Blog", path: "/blog" },
+	{ label: "Contact", path: `mailto:${process.env.PERSONAL_EMAIL}` },
 ];
 
 const socialIcons = [
-	{ href: "https://nextglabs.medium.com/", ariaLabel: "Medium Account", icon: <FaMedium /> },
-	{ href: "https://github.com/nextglabs/", ariaLabel: "Github Account", icon: <FiGithub /> },
+	{ href: SOCIAL.MEDIUM_ACCOUNT_URL, ariaLabel: "Medium Account", icon: <FaMedium /> },
+	{ href: SOCIAL.GITHUB_ACCOUNT_URL, ariaLabel: "Github Account", icon: <FiGithub /> },
 ];
 
 interface NavLinkProps extends LinkProps {
@@ -62,7 +64,7 @@ export const TopNav = () => {
 
 	return (
 		<Box px={4}>
-			<Flex h={16} alignItems={"center"} justifyContent={"space-between"} w={["90%", "85%", "80%"]} mx="auto">
+			<Flex h={20} alignItems={"center"} justifyContent={"space-between"} w={layoutDimensions.width} mx="auto">
 				<IconButton
 					size={"md"}
 					icon={isOpen ? <FiX /> : <FiMenu />}
