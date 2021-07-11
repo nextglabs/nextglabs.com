@@ -5,4 +5,7 @@ export const SOCIAL = {
 
 	// Medium
 	MEDIUM_ACCOUNT_URL: "https://nextglabs.medium.com",
+
+	// Email
+	EMAIL: "contact@nextglabs.com",
 };

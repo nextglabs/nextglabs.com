@@ -5,7 +5,7 @@ import { DefaultSeo } from "next-seo";
 import theme from "@/theme";
 import { GlobalFonts } from "@/theme/fonts";
 import { Layout } from "@/layout";
-import { configSEO } from "next-seo.config";
+import { configSEO } from "@/config/seo";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
