@@ -2,7 +2,7 @@ import { gql } from "graphql-request";
 
 export const GET_PROJECTS_QUERY = gql`
 	query getProjects {
-		projects {
+		projects(orderBy: updatedAt_ASC) {
 			id
 			title
 			description
@@ -21,6 +21,8 @@ export const GET_PROJECTS_QUERY = gql`
 				url
 				alt
 			}
+
+			updatedAt
 		}
 	}
 `;
