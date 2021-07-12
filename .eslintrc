@@ -1,5 +1,8 @@
 {
 	"extends": "next",
+	"env": {
+		"jest": true
+	},
 	"rules": {
 		"no-unused-vars": "warn",
 		"quotes": ["error", "double"]
