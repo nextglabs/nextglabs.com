@@ -1,11 +1,11 @@
 import { Button, Badge, Box, Heading, HStack, Text, Image, VStack, BadgeProps, useDisclosure } from "@chakra-ui/react";
 import { FiLayers } from "react-icons/fi";
+import useSound from "use-sound";
 import { SlideUpTransition } from "@/components/ui/animation/Transitions";
 import { ProjectsListItemModal } from "./Modal";
 import { ProjectLinks } from "./Links";
 import { Project } from "../../types";
 import { getTagColorScheme, sliceItems } from "../../utils";
-import useSound from "use-sound";
 
 const Tag = (props: BadgeProps) => <Badge my="1" {...props} />;
 
@@ -31,7 +31,7 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 	} = props;
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const [play] = useSound("assets/audio/menu-open-sound.mp3", { volume: 0.25 });
+	const [play] = useSound("assets/audio/menu-open-sound.mp3", { volume: 0.4 });
 
 	const handleModalToggle = (mode: "open" | "close") => {
 		play();

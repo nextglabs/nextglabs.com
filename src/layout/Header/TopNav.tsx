@@ -14,19 +14,15 @@ const socialIcons = [
 ];
 
 interface NavLinkProps extends LinkProps {
-	index?: number;
 	label: string | JSX.Element;
-	href: string;
 }
 
-const NavLink = ({ label, href, ...restProps }: NavLinkProps) => (
-	<NextLink href={href} passHref>
-		<Link {...restProps}>
-			<Text fontSize="sm" casing="uppercase">
-				{label}
-			</Text>
-		</Link>
-	</NextLink>
+const NavLink = ({ label, ...restProps }: NavLinkProps) => (
+	<Link {...restProps}>
+		<Text fontSize="sm" casing="uppercase">
+			{label}
+		</Text>
+	</Link>
 );
 
 const NavIcon = ({ href, ariaLabel, icon }) => (
