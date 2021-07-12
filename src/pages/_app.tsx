@@ -3,6 +3,9 @@ import { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";
 import { SWRConfig } from "swr";
 
+// Polyfill
+import "intersection-observer";
+
 import theme from "@/theme";
 import { GlobalFonts } from "@/theme/fonts";
 import { Layout } from "@/layout";
