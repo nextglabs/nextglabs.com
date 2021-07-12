@@ -1,39 +1,54 @@
-# Example app with [chakra-ui](https://github.com/chakra-ui/chakra-ui) and Typescript
+# Nextglabs.com - Portoflio
 
-This example features how to use [chakra-ui](https://github.com/chakra-ui/chakra-ui) as the component library within a Next.js app with typescript.
+[![Author](https://img.shields.io/badge/author-nextglabs-9AECFA?style=flat-square)](https://github.com/nextglabs)
+[![Languages](https://img.shields.io/github/languages/count/nextglabs/nextglabs.com?color=%239AECFA&style=flat-square)](#)
+[![Stars](https://img.shields.io/github/stars/nextglabs/nextglabs.com?color=9AECFA&style=flat-square)](https://github.com/nextglabs/nextglabs.com/stargazers)
 
-Next.js and chakra-ui have built-in TypeScript declarations, so we'll get autocompletion for their modules straight away.
+---
 
-We are connecting the Next.js `_app.js` with `chakra-ui`'s Provider and theme so the pages can have app-wide dark/light mode. We are also creating some components which shows the usage of `chakra-ui`'s style props.
+<p align="center">
+   <img src="./.github/assets/og-github-nextlabs.png" width="1280"/>
+</p>
 
-## Preview
+<p align="center">
+   <a href="https://nextglabs.com">Go check it out 🎉</a>
+</p>
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+---
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-chakra-ui-typescript)
+# :pushpin: Table of Contents
 
-## Deploy your own
+-   [Running Locally](#construction_worker-running-locally)
+-   [FAQ](#postbox-faq)
+-   [Issues](#bug-issues)
+-   [Contributing](#tada-contributing)
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+## :construction_worker: Running Locally
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-chakra-ui-typescript&project-name=with-chakra-ui-typescript&repository-name=with-chakra-ui-typescript)
-
-## How to use
-
-### Using `create-next-app`
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-chakra-ui-typescript with-chakra-ui-typescript-app
-# or
-yarn create next-app --example with-chakra-ui-typescript with-chakra-ui-typescript-app
+```
+$ git clone https://github.com/nextglabs/nextglabs.com.git
+$ cd nextglabs.com
+$ cp .env.local.example .env.local
+$ yarn
+$ yarn dev
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Define the environment variables by creating a .env.local file similar to [.env.local.example](https://github.com/nextglabs/nextglabs.com/blob/master/.env.local.example)
 
-## Notes
+# :postbox: Faq
 
-Chakra has supported Gradients and RTL in `v1.1`. To utilize RTL, [add RTL direction and swap](https://chakra-ui.com/docs/features/rtl-support).
+**Question:** What are the technologies used in this project?
 
-If you don't have multi-direction app, you should make `<Html lang="ar" dir="rtl">` inside `_document.ts`.
+**Answer:** [Next.js](https://nextjs.org/), [Chakra UI](https://chakra-ui.com/) and [GraphCMS](https://graphcms.com/).
+
+**Question** Why Next.js instead of other frameworks of React out there?
+
+**Answer** I chose Next.js in order to opt out for different rendering strategies and improved SEO out of the box.
+
+# :bug: Issues
+
+Feel free to **file a new issue** with a respective title and description. If you already found a solution to your problem, **I would love to review your pull request**!
+
+# :tada: Contributing
+
+Check out the [contributing](https://github.com/nextglabs/nextglabs.com/blob/master/CONTRIBUTING.md) page to see the best places to file issues, start discussions and begin contributing.
