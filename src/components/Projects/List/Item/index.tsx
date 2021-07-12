@@ -46,16 +46,16 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 
 	return (
 		<SlideUpTransition order={order}>
-			<Box maxW="md" p="4" textAlign="center">
+			<Box maxW="md" textAlign="center">
 				<VStack spacing="2">
 					<Image
 						loading="lazy"
-						maxH="320px"
 						objectFit="cover"
 						src={featuredImage?.url}
 						alt={featuredImage?.alt || `${title}-project-image`}
-						rounded="3xl"
-						mb="2"
+						rounded="xl"
+						boxShadow="xl"
+						mb="5"
 					/>
 					<Heading as="h4" size="md">
 						{title}
