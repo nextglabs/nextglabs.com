@@ -35,3 +35,7 @@ export const SlideUpTransition = ({ children, order = 0 }) => {
 		</MotionBox>
 	);
 };
+
+export const HoverTransition = ({ children }) => {
+	return <MotionBox whileHover={{ translateY: -5 }}>{children}</MotionBox>;
+};

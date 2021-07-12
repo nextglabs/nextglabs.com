@@ -1,7 +1,6 @@
 import { Box, Flex, HStack, Text, Link, LinkProps, IconButton, useColorModeValue } from "@chakra-ui/react";
 import { FiGithub } from "react-icons/fi";
 import { FaMedium } from "react-icons/fa";
-import NextLink from "next/link";
 import { ThemeModeToggler } from "@/components/ui/ThemeModeToggler";
 import { SOCIAL } from "@/config/social";
 import { NAV } from "@/config/nav";

@@ -1,7 +1,19 @@
-import { Button, Badge, Box, Heading, HStack, Text, Image, VStack, BadgeProps, useDisclosure } from "@chakra-ui/react";
+import {
+	Button,
+	Badge,
+	Box,
+	Heading,
+	HStack,
+	Text,
+	Image,
+	VStack,
+	BadgeProps,
+	useDisclosure,
+	LinkOverlay,
+} from "@chakra-ui/react";
 import { FiLayers } from "react-icons/fi";
 import useSound from "use-sound";
-import { SlideUpTransition } from "@/components/ui/animation/Transitions";
+import { HoverTransition, SlideUpTransition } from "@/components/ui/animation/Transitions";
 import { ProjectsListItemModal } from "./Modal";
 import { ProjectLinks } from "./Links";
 import { Project } from "../../types";
@@ -48,15 +60,19 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 		<SlideUpTransition order={order}>
 			<Box maxW="md" textAlign="center">
 				<VStack spacing="2">
-					<Image
-						loading="lazy"
-						objectFit="cover"
-						src={featuredImage?.url}
-						alt={featuredImage?.alt || `${title}-project-image`}
-						rounded="xl"
-						boxShadow="xl"
-						mb="5"
-					/>
+					<HoverTransition>
+						<LinkOverlay href={liveUrl} isExternal>
+							<Image
+								loading="lazy"
+								objectFit="cover"
+								src={featuredImage?.url}
+								alt={featuredImage?.alt || `${title}-project-image`}
+								rounded="xl"
+								boxShadow="xl"
+								mb="5"
+							/>
+						</LinkOverlay>
+					</HoverTransition>
 					<Heading as="h4" size="md">
 						{title}
 					</Heading>
