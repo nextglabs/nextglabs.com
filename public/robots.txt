@@ -1,6 +1,6 @@
 
     # AUTOMATICALLY GENERATED, DO NOT EDIT
-    Sitemap: https://nextglabs.vercel.app/sitemap.xml
+    Sitemap: https://nextglabs.com/sitemap.xml
 
     User-agent: *
     Allow: /*
