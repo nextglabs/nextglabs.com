@@ -10,7 +10,7 @@ export const Footer = (props: FlexProps) => (
 			<Text fontSize="sm">&copy; Copyright Nextglabs {currentYear}.</Text>
 			<Text fontSize="sm" textAlign="right">
 				Created with ❤️ using React &amp; NextJS.{" "}
-				<Link variant="colored" href={SOCIAL.GITHUB_PORTFOLIO_URL}>
+				<Link variant="colored" href={SOCIAL.GITHUB_PORTFOLIO_URL} isExternal>
 					View Source.
 				</Link>
 			</Text>
