@@ -7,6 +7,6 @@ describe("<CallToAction />", () => {
 		render(<CallToAction />);
 		screen.getByText(/got a project\?/i);
 		const link = screen.getByText(/let\'s talk!/i);
-		expect(link.closest("a")).toHaveAttribute("href", `mailto:${SOCIAL.EMAIL}`);
+		expect(link).toHaveAttribute("href", `mailto:${SOCIAL.EMAIL}`);
 	});
 });

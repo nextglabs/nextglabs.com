@@ -74,8 +74,8 @@ describe("<ProjectsListItem />", () => {
 describe("<ProjectListItemLinks />", () => {
 	it("Links to correct urls", () => {
 		render(<ProjectLinks urls={{ liveUrl: data.liveUrl, githubUrl: data.githubUrl }} />);
-		expect(screen.getByText(/github/i).closest("a")).toHaveAttribute("href", data.githubUrl);
-		expect(screen.getByText(/live/i).closest("a")).toHaveAttribute("href", data.liveUrl);
+		expect(screen.getByText(/github/i)).toHaveAttribute("href", data.githubUrl);
+		expect(screen.getByText(/live/i)).toHaveAttribute("href", data.liveUrl);
 	});
 
 	it("Only shows given urls", () => {
