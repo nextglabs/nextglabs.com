@@ -23,16 +23,18 @@ const formatTitle = (title: string, array: string[]) => (isMulti(array) ? plural
 const formatItems = (array: string[]) =>
 	array.map((item, index) => (
 		<HStack display="inline-flex" key={index}>
-			<Text fontWeight="normal">{item}</Text>
+			<Text as="span" fontWeight="normal">
+				{item}
+			</Text>
 			{index < array.length - 1 && (
-				<Text color="gray.500" fontSize="xs" pr="2">
+				<Text as="span" color="gray.500" fontSize="xs" pr="2">
 					•
 				</Text>
 			)}
 		</HStack>
 	));
 
-type ProjectsListItemModalProps = UseDisclosureProps & Project;
+type ProjectsListItemModalProps = UseDisclosureProps & Partial<Project>;
 
 export const ProjectsListItemModal = (props: ProjectsListItemModalProps) => {
 	const { isOpen, onClose, languages, frameworks, libraries, databases, title, githubUrl, liveUrl } = props;
@@ -88,7 +90,7 @@ export const ProjectsListItemModal = (props: ProjectsListItemModalProps) => {
 							filteredTree.map((details, index) => (
 								<HStack key={index}>
 									<Icon as={details.icon} color={iconColor} />
-									<Text fontWeight="500">
+									<Text as="span" fontWeight="500">
 										{formatTitle(details.title, details.items)}: {formatItems(details.items)}
 									</Text>
 								</HStack>
