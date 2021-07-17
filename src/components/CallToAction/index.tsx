@@ -1,4 +1,4 @@
-import { Button, Center, Flex, Heading, Image, Text, useColorModeValue } from "@chakra-ui/react";
+import { Center, Flex, Heading, Image, Text, Link, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { SOCIAL } from "@/config/social";
 
@@ -31,17 +31,17 @@ export const CallToAction = () => (
 			</Text>
 			<Heading zIndex="10" as="h3" size="xl">
 				Got a project?{" "}
-				<NextLink href={`mailto:${SOCIAL.EMAIL}`}>
-					<Button
-						variant="link"
-						fontSize="2x-large"
-						fontWeight="bold"
-						textDecoration="underline"
-						_hover={{ color: useColorModeValue("purple.400", "orange.200") }}
-					>
+				<Text
+					as="span"
+					fontSize="2x-large"
+					fontWeight="bold"
+					textDecoration="underline"
+					_hover={{ color: useColorModeValue("purple.400", "orange.200") }}
+				>
+					<Link as={NextLink} href={`mailto:${SOCIAL.EMAIL}`}>
 						Let&apos;s Talk!
-					</Button>
-				</NextLink>
+					</Link>
+				</Text>
 			</Heading>
 		</Flex>
 	</Center>
