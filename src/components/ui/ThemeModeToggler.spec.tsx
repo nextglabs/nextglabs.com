@@ -1,4 +1,5 @@
-import { render, fireEvent, waitFor, screen } from "@/utils/testUtils";
+import { render, waitFor, screen } from "@/utils/testUtils";
+import user from "@testing-library/user-event";
 import { ColorModeProvider } from "@chakra-ui/react";
 import React from "react";
 import { ThemeModeToggler } from "./ThemeModeToggler";
@@ -15,7 +16,7 @@ describe("<ThemeModeToggler />", () => {
 			</ColorModeProvider>,
 		);
 		const button = getToggleButton(nextMode);
-		fireEvent.mouseOver(button);
+		user.hover(button);
 		await waitFor(() => getTooltip(nextMode));
 	});
 
@@ -26,9 +27,9 @@ describe("<ThemeModeToggler />", () => {
 			</ColorModeProvider>,
 		);
 		const switchToDarkButton = getToggleButton("light");
-		fireEvent.click(switchToDarkButton);
+		user.click(switchToDarkButton);
 
-		fireEvent.mouseOver(switchToDarkButton);
+		user.hover(switchToDarkButton);
 
 		await waitFor(() => getTooltip("dark"));
 	});

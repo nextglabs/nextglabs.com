@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import { render, fireEvent, waitFor, screen } from "@/utils/testUtils";
+import { render, waitFor, screen } from "@/utils/testUtils";
+import user from "@testing-library/user-event";
 import { HEADER_SOCIAL_ICONS } from "@/config/social";
 import { NAV } from "@/config/nav";
 import { Nav } from ".";
@@ -31,7 +32,7 @@ describe("<Nav />", () => {
 
 			render(<Nav isSmall />);
 			const button = screen.getByLabelText(/open menu/i);
-			fireEvent.click(button);
+			user.click(button);
 
 			await waitFor(() => {
 				NAV.forEach((item, pageIndex) => {
@@ -71,6 +72,7 @@ describe("<Nav />", () => {
 
 			NAV.forEach(item => {
 				const menuItem = screen.getByText(item.label);
+				// eslint-disable-next-line testing-library/no-node-access
 				expect(menuItem.closest("a")).toHaveAttribute("href", item.href);
 			});
 		});
