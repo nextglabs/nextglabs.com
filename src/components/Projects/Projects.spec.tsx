@@ -1,5 +1,4 @@
-import { axe } from "jest-axe";
-import { render } from "@/utils/testUtils";
+import { render, screen } from "@/utils/testUtils";
 import { sliceItems } from "@/components/Projects/utils";
 import { useProjects } from "@/hooks/useProjects";
 import { ProjectsListItem } from "./List/Item";
@@ -29,11 +28,11 @@ const data = {
 
 describe("<ProjectsListItem />", () => {
 	it("Renders project details", () => {
-		const { getByText, getByRole } = render(<ProjectsListItem data={data} />);
+		render(<ProjectsListItem data={data} />);
 
 		// Title & Description
-		getByText(data.title);
-		getByText(data.description);
+		screen.getByText(data.title);
+		screen.getByText(data.description);
 
 		// Image
 		const displayedImage = document.querySelector("img") as HTMLImageElement;
@@ -41,8 +40,8 @@ describe("<ProjectsListItem />", () => {
 		expect(displayedImage.alt).toContain(data.featuredImage.alt);
 
 		// Links
-		expect(getByText(/github/i));
-		expect(getByText(/live/i));
+		expect(screen.getByText(/github/i));
+		expect(screen.getByText(/live/i));
 
 		// Tech Stack Tags & Button
 		const { displayedItems, remainingItems } = sliceItems(
@@ -50,19 +49,19 @@ describe("<ProjectsListItem />", () => {
 			4,
 		);
 		displayedItems.forEach(item => {
-			getByText(item);
+			screen.getByText(item);
 		});
-		getByText(`${remainingItems}+`);
-		getByRole("button", { name: /Stack/i });
+		screen.getByText(`${remainingItems}+`);
+		screen.getByRole("button", { name: /Stack/i });
 	});
 
 	it("Hides Stack button when noting to show", () => {
-		const { queryByRole } = render(
+		render(
 			<ProjectsListItem
 				data={{ title: data.title, description: data.description, featuredImage: data.featuredImage }}
 			/>,
 		);
-		expect(queryByRole("button", { name: /Stack/i })).toBeNull();
+		expect(screen.queryByRole("button", { name: /Stack/i })).not.toBeInTheDocument();
 	});
 
 	it("Renders without crashing when server data is incorrect", () => {
@@ -74,45 +73,43 @@ describe("<ProjectsListItem />", () => {
 
 describe("<ProjectListItemLinks />", () => {
 	it("Links to correct urls", () => {
-		const { getByText } = render(<ProjectLinks urls={{ liveUrl: data.liveUrl, githubUrl: data.githubUrl }} />);
-		expect(getByText(/github/i).closest("a")).toHaveAttribute("href", data.githubUrl);
-		expect(getByText(/live/i).closest("a")).toHaveAttribute("href", data.liveUrl);
+		render(<ProjectLinks urls={{ liveUrl: data.liveUrl, githubUrl: data.githubUrl }} />);
+		expect(screen.getByText(/github/i).closest("a")).toHaveAttribute("href", data.githubUrl);
+		expect(screen.getByText(/live/i).closest("a")).toHaveAttribute("href", data.liveUrl);
 	});
 
 	it("Only shows given urls", () => {
-		const { rerender, queryByText } = render(<ProjectLinks urls={{ liveUrl: data.liveUrl }} />);
-		expect(queryByText(/github/i)).toBeNull();
+		const { rerender } = render(<ProjectLinks urls={{ liveUrl: data.liveUrl }} />);
+		expect(screen.queryByText(/github/i)).not.toBeInTheDocument();
 
 		rerender(<ProjectLinks urls={{ githubUrl: data.githubUrl }} />);
-		expect(queryByText(/live/i)).toBeNull();
+		expect(screen.queryByText(/live/i)).not.toBeInTheDocument();
 	});
 
 	it("Displays long labels (when `shortLabels={false}`", () => {
-		const { getByText } = render(
-			<ProjectLinks urls={{ liveUrl: data.liveUrl, githubUrl: data.githubUrl }} shortLabels={false} />,
-		);
-		getByText(/github repository/i);
-		getByText(/live website/i);
+		render(<ProjectLinks urls={{ liveUrl: data.liveUrl, githubUrl: data.githubUrl }} shortLabels={false} />);
+		screen.getByText(/github repository/i);
+		screen.getByText(/live website/i);
 	});
 });
 
 describe("<ProjectListItemModal />", () => {
 	it("Display Title & Links", () => {
-		const { getByText } = render(<ProjectsListItemModal isOpen {...data} />);
-		getByText(data.title);
+		render(<ProjectsListItemModal isOpen {...data} />);
+		screen.getByText(data.title);
 	});
 
 	it("Displays no stacks message", () => {
-		const { getByText } = render(<ProjectsListItemModal isOpen />);
-		getByText(/No Stack has been defined for this project./i);
+		render(<ProjectsListItemModal isOpen />);
+		screen.getByText(/No Stack has been defined for this project./i);
 	});
 
 	it("Displays only the provided stack items", () => {
-		const { queryByText } = render(<ProjectsListItemModal isOpen databases={data.databases} />);
-		expect(queryByText(/databases/i)).not.toBeNull();
-		expect(queryByText(/frameworks/i)).toBeNull();
-		expect(queryByText(/libraries/i)).toBeNull();
-		expect(queryByText(/languages/i)).toBeNull();
+		render(<ProjectsListItemModal isOpen databases={data.databases} />);
+		expect(screen.queryByText(/databases/i)).toBeInTheDocument();
+		expect(screen.queryByText(/frameworks/i)).not.toBeInTheDocument();
+		expect(screen.queryByText(/libraries/i)).not.toBeInTheDocument();
+		expect(screen.queryByText(/languages/i)).not.toBeInTheDocument();
 	});
 
 	it("Displays singular label when array contains only 1 item", () => {
@@ -120,7 +117,7 @@ describe("<ProjectListItemModal />", () => {
 		const library = data.libraries[0];
 		const database = data.databases[0];
 		const language = data.languages[0];
-		const { getByText } = render(
+		render(
 			<ProjectsListItemModal
 				isOpen
 				frameworks={[framework]}
@@ -129,19 +126,19 @@ describe("<ProjectListItemModal />", () => {
 				languages={[language]}
 			/>,
 		);
-		getByText(/framework/i);
-		getByText(/library/i);
-		getByText(/database/i);
-		getByText(/language/i);
+		screen.getByText(/framework/i);
+		screen.getByText(/library/i);
+		screen.getByText(/database/i);
+		screen.getByText(/language/i);
 
-		getByText(framework);
-		getByText(library);
-		getByText(database);
-		getByText(language);
+		screen.getByText(framework);
+		screen.getByText(library);
+		screen.getByText(database);
+		screen.getByText(language);
 	});
 
 	it("Displays stack items", () => {
-		const { getByText } = render(
+		render(
 			<ProjectsListItemModal
 				isOpen
 				frameworks={data.frameworks}
@@ -153,7 +150,7 @@ describe("<ProjectListItemModal />", () => {
 
 		const stack = [...data.languages, ...data.frameworks, ...data.databases, ...data.libraries];
 		stack.forEach(item => {
-			getByText(item);
+			screen.getByText(item);
 		});
 	});
 });
@@ -176,27 +173,24 @@ describe("<ProductsList", () => {
 	});
 
 	it("Displays skeleton when fetching projects", () => {
-		mockedUseProject.mockImplementation(() => ({ isLoading: true }));
+		mockedUseProject.mockReturnValue({ isLoading: true });
 
-		const { queryAllByTestId } = render(<ProjectsList />);
-		expect(queryAllByTestId("project-skeleton").length).toBe(3);
+		render(<ProjectsList />);
+		expect(screen.queryAllByTestId("project-skeleton").length).toBe(3);
 	});
 
 	it("Displays error when fetch projects fails", () => {
-		mockedUseProject.mockImplementation(() => ({ isError: true }));
+		mockedUseProject.mockReturnValue({ isError: true });
 
-		const { getByText } = render(<ProjectsList />);
-		getByText(/Sorry, something terrible happened and the projects could not be loaded... 😱/i);
+		render(<ProjectsList />);
+		screen.getByText(/Sorry, something terrible happened and the projects could not be loaded... 😱/i);
 	});
 
 	it("Displays projects when fetch projects succeeds", async () => {
-		mockedUseProject.mockImplementation(() => ({ data: { projects: [data, data] } }));
-		const { container, queryAllByText } = render(<ProjectsList />);
+		mockedUseProject.mockReturnValue({ data: { projects: [data, data] } });
+		render(<ProjectsList />);
 
-		expect(queryAllByText(data.title).length).toBe(2);
-		expect(queryAllByText(data.description).length).toBe(2);
-
-		const results = await axe(container);
-		expect(results).toHaveNoViolations();
+		expect(screen.queryAllByText(data.title).length).toBe(2);
+		expect(screen.queryAllByText(data.description).length).toBe(2);
 	});
 });
