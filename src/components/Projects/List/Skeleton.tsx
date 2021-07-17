@@ -5,7 +5,7 @@ export const ProjectsListSkeleton = () => (
 	<Grid width="100%" w="100%" rowGap="12" gap="4" templateColumns={["1fr", null, "repeat(2, 1fr)", "repeat(3, 1fr)"]}>
 		{[1, 2, 3].map(index => {
 			return (
-				<GridItem key={index}>
+				<GridItem key={index} data-testid="project-skeleton">
 					<SlideUpTransition order={index}>
 						<Box maxW="100%" p="4">
 							<Skeleton height="220px" rounded="3xl" mb="8" />

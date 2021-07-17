@@ -8,13 +8,12 @@ import "intersection-observer";
 
 import { swrConfigOptions } from "@/config/swr";
 import theme from "@/theme";
-import { Layout } from "@/layout";
 
 const Providers: FC = ({ children }) => {
 	return (
 		<SWRConfig value={swrConfigOptions}>
 			<ChakraProvider resetCSS theme={theme}>
-				<Layout>{children}</Layout>
+				{children}
 			</ChakraProvider>
 		</SWRConfig>
 	);
