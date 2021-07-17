@@ -24,7 +24,7 @@ const Tag = (props: BadgeProps) => <Badge my="1" {...props} />;
 export interface ProjectsListItemProps {
 	data: Project;
 	/** Animation order */
-	order: number;
+	order?: number;
 }
 export const ProjectsListItem = (props: ProjectsListItemProps) => {
 	const {
@@ -43,7 +43,7 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 	} = props;
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const [play] = useSound("assets/audio/menu-open-sound.mp3", { volume: 0.4 });
+	const [play] = useSound("assets/audio/menu-open-sound.mp3", { volume: 0.2 });
 
 	const handleModalToggle = (mode: "open" | "close") => {
 		play();
@@ -54,7 +54,10 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 		}
 	};
 
-	const tags = sliceItems([...frameworks, ...libraries, ...languages], 4);
+	const { displayedItems, remainingItems } = sliceItems([...frameworks, ...libraries, ...languages], 4);
+
+	// Display nothing if these required vars are not provided somehow
+	if (!title || !description || !featuredImage?.url) return null;
 
 	return (
 		<SlideUpTransition order={order}>
@@ -85,26 +88,28 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
 							))}
 						</HStack>
 						<HStack wrap="wrap" justifyContent="center">
-							{tags.displayedItems.map((item, index) => (
+							{displayedItems.map((item, index) => (
 								<Tag key={`tag-${index}`} colorScheme={getTagColorScheme(item)}>
 									{item}
 								</Tag>
 							))}
-							{tags.remainingItems && <Tag>{tags.remainingItems}+</Tag>}
+							{remainingItems && <Tag>{remainingItems}+</Tag>}
 						</HStack>
 					</VStack>
 					<Text variant="lighter" pt="2">
 						{description}
 					</Text>
-					<Button
-						onClick={() => handleModalToggle("open")}
-						colorScheme="cyan"
-						size="sm"
-						variant="ghost"
-						rightIcon={<FiLayers />}
-					>
-						Stack
-					</Button>
+					{displayedItems.length && (
+						<Button
+							onClick={() => handleModalToggle("open")}
+							colorScheme="cyan"
+							size="sm"
+							variant="ghost"
+							rightIcon={<FiLayers />}
+						>
+							Stack
+						</Button>
+					)}
 					<ProjectsListItemModal isOpen={isOpen} onClose={() => handleModalToggle("close")} {...props.data} />
 					<ProjectLinks urls={{ githubUrl, liveUrl }} />
 				</VStack>
