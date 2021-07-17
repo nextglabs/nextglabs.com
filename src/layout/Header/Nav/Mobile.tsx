@@ -32,6 +32,7 @@ const NavMenuButton = ({ label, href, ...restProps }: NavMenuButtonProps) => {
 				_hover={{
 					cursor: isCurrent ? "initial" : "pointer",
 				}}
+				aria-current={isCurrent ? "page" : undefined}
 				{...restProps}
 			>
 				{label}
@@ -40,7 +41,7 @@ const NavMenuButton = ({ label, href, ...restProps }: NavMenuButtonProps) => {
 	);
 };
 
-export const MobileMenu = () => {
+export const HeaderNavMobile = () => {
 	const menuBorderColor = useColorModeValue("cyan.100", "cyan.200");
 	const menuBgColor = useColorModeValue("", "gray.900");
 	return (
