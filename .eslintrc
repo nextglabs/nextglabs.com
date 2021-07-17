@@ -1,8 +1,9 @@
 {
-	"extends": "next",
+	"extends": ["plugin:testing-library/react", "plugin:jest-dom/recommended", "next"],
 	"env": {
 		"jest": true
 	},
+	"plugins": ["testing-library", "jest-dom"],
 	"rules": {
 		"no-unused-vars": "warn",
 		"quotes": ["error", "double"]
