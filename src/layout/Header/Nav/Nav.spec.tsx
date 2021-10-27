@@ -19,7 +19,7 @@ describe("<Nav />", () => {
 
 			// Social Icons + Theme Mode Toggle
 			HEADER_SOCIAL_ICONS.forEach(item => {
-				screen.getByRole("link", { name: item.ariaLabel });
+				screen.getByRole("link", { name: item["aria-label"] });
 			});
 			expect(screen.getByTestId("theme-mode-toggler"));
 		});
@@ -57,7 +57,7 @@ describe("<Nav />", () => {
 
 			// Social Icons + Theme Mode Toggle
 			HEADER_SOCIAL_ICONS.forEach(item => {
-				screen.getByRole("link", { name: item.ariaLabel });
+				screen.getByRole("link", { name: item["aria-label"] });
 			});
 			expect(screen.getByTestId("theme-mode-toggler"));
 		});
