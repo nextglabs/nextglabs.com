@@ -14,5 +14,10 @@ export const styles = {
       backgroundSize: "contain",
       backgroundRepeat: "no-repeat",
     },
+    li: {
+      listStylePosition: "outside",
+      marginLeft: "18px",
+      marginBottom: "4px",
+    },
   }),
 };

@@ -1,63 +1,64 @@
 {
-	"name": "with-chakra-ui-typescript",
-	"version": "1.0.0",
-	"scripts": {
-		"dev": "next",
-		"build": "next build",
-		"start": "next start",
-		"lint:style": "next lint --dir src",
-		"lint:fix": "yarn lint:style --fix",
-		"lint:types": "tsc --noEmit",
-		"lint:all": "npm-run-all -p lint:style lint:types",
-		"test": "jest",
-		"prepare": "husky install"
-	},
-	"dependencies": {
-		"@chakra-ui/icons": "^1.0.16",
-		"@chakra-ui/react": "^1.6.10",
-		"@chakra-ui/theme-tools": "^1.2.2",
-		"@emotion/react": "11.1.5",
-		"@emotion/styled": "11.1.5",
-		"framer-motion": "^4.1.17",
-		"graphql": "^15.5.1",
-		"graphql-request": "^3.4.0",
-		"intersection-observer": "^0.12.0",
-		"next": "latest",
-		"next-seo": "^4.26.0",
-		"pluralize": "^8.0.0",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"react-icons": "^4.2.0",
-		"react-intersection-observer": "^8.32.0",
-		"swr": "^0.5.6",
-		"use-sound": "^4.0.1"
-	},
-	"devDependencies": {
-		"@testing-library/jest-dom": "^5.14.1",
-		"@testing-library/react": "^12.0.0",
-		"@testing-library/user-event": "^13.2.0",
-		"@types/jest": "^26.0.24",
-		"@types/node": "^14.6.0",
-		"@types/react": "^17.0.3",
-		"@types/react-dom": "^17.0.3",
-		"babel-jest": "^27.0.6",
-		"eslint": "^7.30.0",
-		"eslint-config-next": "^11.0.1",
-		"eslint-plugin-jest-dom": "^3.9.0",
-		"eslint-plugin-testing-library": "^4.9.0",
-		"globby": "^11.0.4",
-		"husky": "^7.0.0",
-		"jest": "^27.0.6",
-		"lint-staged": "^11.0.0",
-		"npm-run-all": "^4.1.5",
-		"prettier": "^2.3.2",
-		"typescript": "4.3.2"
-	},
-	"lint-staged": {
-		"**/*.{ts,tsx}": [
-			"yarn lint:fix",
-			"git add"
-		]
-	},
-	"license": "MIT"
+  "name": "nextglabs.com",
+  "version": "1.1.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "lint:style": "next lint --dir src",
+    "lint:fix": "yarn lint:style --fix",
+    "lint:types": "tsc --noEmit",
+    "lint:all": "npm-run-all -p lint:style lint:types",
+    "test": "jest",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^1.0.16",
+    "@chakra-ui/react": "^1.6.10",
+    "@chakra-ui/theme-tools": "^1.2.2",
+    "@emotion/react": "11.1.5",
+    "@emotion/styled": "11.1.5",
+    "framer-motion": "^4.1.17",
+    "graphql": "^15.5.1",
+    "graphql-request": "^3.4.0",
+    "intersection-observer": "^0.12.0",
+    "next": "latest",
+    "next-mdx-remote": "^3.0.7",
+    "next-seo": "^4.26.0",
+    "pluralize": "^8.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
+    "react-intersection-observer": "^8.32.0",
+    "swr": "^0.5.6",
+    "use-sound": "^4.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.2.0",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^14.6.0",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "babel-jest": "^27.0.6",
+    "eslint": "^7.30.0",
+    "eslint-config-next": "^11.0.1",
+    "eslint-plugin-jest-dom": "^3.9.0",
+    "eslint-plugin-testing-library": "^4.9.0",
+    "globby": "^11.0.4",
+    "husky": "^7.0.0",
+    "jest": "^27.0.6",
+    "lint-staged": "^11.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.2",
+    "typescript": "4.3.2"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "yarn lint:fix",
+      "git add"
+    ]
+  },
+  "license": "MIT"
 }
