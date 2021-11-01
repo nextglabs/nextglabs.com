@@ -1,4 +1,4 @@
-import { Button, Badge, Box, Heading, HStack, Text, Image, VStack, BadgeProps, useDisclosure, LinkOverlay } from "@chakra-ui/react";
+import { Button, Badge, Box, Heading, HStack, Text, Image, VStack, BadgeProps, useDisclosure } from "@chakra-ui/react";
 import { FiLayers } from "react-icons/fi";
 import useSound from "use-sound";
 import { HoverTransition, SlideUpTransition } from "@/components/ui/animation/Transitions";
