@@ -71,6 +71,5 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
         title: data.page.title,
       },
     },
-    revalidate: 60 * 60,
   };
 };
