@@ -17,7 +17,7 @@ export const ProjectsListItemEmpty = (props: ProjectsListItemEmptyProps) => {
           <Image
             loading="lazy"
             objectFit="cover"
-            src={useColorModeValue("assets/images/coming-next-dark.svg", "assets/images/coming-next-light.svg")}
+            src={useColorModeValue("assets/images/coming-next-dark.jpg", "assets/images/coming-next-light.jpg")}
             alt="Empty Project Image"
             rounded="xl"
             boxShadow="xl"
