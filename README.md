@@ -7,7 +7,7 @@
 ---
 
 <p align="center">
-   <img src="./.github/assets/og-github-nextlabs.png" width="1280"/>
+   <img src="./.github/assets/og-github-nextglabs.jpg" width="1280"/>
 </p>
 
 <p align="center">
@@ -18,10 +18,10 @@
 
 # :pushpin: Table of Contents
 
--   [Running Locally](#construction_worker-running-locally)
--   [FAQ](#postbox-faq)
--   [Issues](#bug-issues)
--   [Contributing](#tada-contributing)
+- [Running Locally](#construction_worker-running-locally)
+- [FAQ](#postbox-faq)
+- [Issues](#bug-issues)
+- [Contributing](#tada-contributing)
 
 ## :construction_worker: Running Locally
 
