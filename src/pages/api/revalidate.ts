@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import path from "path";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Check for secret to confirm this is a valid request
@@ -11,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    await res.revalidate(req.body.data.slug);
+    await res.revalidate(path.join("/", req.body.data.slug));
     return res.json({ revalidated: true });
   } catch (err) {
     return res.status(500).send("Error revalidating");
