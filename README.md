@@ -11,7 +11,8 @@
 </p>
 
 <p align="center">
-   <a href="https://nextglabs.com">Go check it out 🎉</a>
+   <a href="https://nextglabs.com">Go check it out 🎉</a><br />
+   You like what you see? Give this repo a star to show your appreciation! ⭐
 </p>
 
 ---
@@ -25,7 +26,7 @@
 
 ## :construction_worker: Running Locally
 
-```
+```shell
 $ git clone https://github.com/nextglabs/nextglabs.com.git
 $ cd nextglabs.com
 $ cp .env.local.example .env.local
@@ -39,11 +40,11 @@ Define the environment variables by creating a .env.local file similar to [.env.
 
 **Question:** What are the technologies used in this project?
 
-**Answer:** [Next.js](https://nextjs.org/), [Chakra UI](https://chakra-ui.com/) and [GraphCMS](https://graphcms.com/).
+**Answer:** [Next.js](https://nextjs.org/), [Chakra UI](https://chakra-ui.com/) and [hygraph (GraphCMS)](https://graphcms.com/).
 
-**Question** Why Next.js instead of other frameworks of React out there?
+**Question:** Why Next.js instead of other frameworks of React out there?
 
-**Answer** I chose Next.js in order to opt out for different rendering strategies and improved SEO out of the box.
+**Answer:** I chose Next.js in order to opt out for different rendering strategies and improved SEO out of the box. Additionally, the ease of Server Side Rendering (SSR) combined with on-demand static revalidation is an amazing combo.
 
 # :bug: Issues
 
