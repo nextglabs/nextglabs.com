@@ -9,28 +9,12 @@ jest.mock("react-intersection-observer");
 (useProjects as jest.Mock<any>).mockImplementation(() => ({ data: { projects: [] } }));
 (useInView as jest.Mock<any>).mockImplementation(() => [null, true]);
 
-// !Workaround for TypeError: env.window.matchMedia is not a function
-// https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
-Object.defineProperty(window, "matchMedia", {
-  writable: true,
-  value: jest.fn().mockImplementation((query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // Deprecated
-    removeListener: jest.fn(), // Deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-});
-
 describe("HomePage", () => {
   it("Overall page and navigation work", async () => {
     render(<HomePage />);
     expect(screen.getByText(/I'm Bassem/i)).toBeInTheDocument();
-    expect(screen.queryByText(/Projects/i, { selector: "span" })).toBeInTheDocument();
-    expect(screen.queryAllByText(/Let's Talk!/i)).toHaveLength(2);
+    expect(screen.getByText(/Projects/i, { selector: "span" })).toBeInTheDocument();
+    expect(screen.getAllByText(/Let's Talk!/i)).toHaveLength(2);
 
     const aboutButton = screen.getByText(/I'm Bassem/i);
     expect(aboutButton).toBeInTheDocument();

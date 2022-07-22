@@ -100,7 +100,7 @@ describe("<ProjectListItemModal />", () => {
 
   it("Displays only the provided stack items", () => {
     render(<ProjectsListItemModal isOpen databases={data.databases} />);
-    expect(screen.queryByText(/databases/i)).toBeInTheDocument();
+    expect(screen.getByText(/databases/i)).toBeInTheDocument();
     expect(screen.queryByText(/frameworks/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/libraries/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/languages/i)).not.toBeInTheDocument();
@@ -136,22 +136,6 @@ describe("<ProjectListItemModal />", () => {
 });
 
 describe("<ProductsList", () => {
-  // !Workaround for TypeError: env.window.matchMedia is not a function
-  // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
-  Object.defineProperty(window, "matchMedia", {
-    writable: true,
-    value: jest.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(), // Deprecated
-      removeListener: jest.fn(), // Deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    })),
-  });
-
   it("Displays skeleton when fetching projects", () => {
     mockedUseProject.mockReturnValue({ isLoading: true });
 
