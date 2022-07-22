@@ -12,32 +12,32 @@ jest.mock("react-intersection-observer");
 // !Workaround for TypeError: env.window.matchMedia is not a function
 // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
 Object.defineProperty(window, "matchMedia", {
-	writable: true,
-	value: jest.fn().mockImplementation(query => ({
-		matches: false,
-		media: query,
-		onchange: null,
-		addListener: jest.fn(), // Deprecated
-		removeListener: jest.fn(), // Deprecated
-		addEventListener: jest.fn(),
-		removeEventListener: jest.fn(),
-		dispatchEvent: jest.fn(),
-	})),
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // Deprecated
+    removeListener: jest.fn(), // Deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
 });
 
 describe("HomePage", () => {
-	it("Overall page and navigation work", async () => {
-		render(<HomePage />);
-		expect(screen.getByText(/I'm Bassem/i)).toBeInTheDocument();
-		expect(screen.queryByText(/Projects/i, { selector: "span" })).toBeInTheDocument();
-		screen.getByText(/Let's Talk!/i);
+  it("Overall page and navigation work", async () => {
+    render(<HomePage />);
+    expect(screen.getByText(/I'm Bassem/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Projects/i, { selector: "span" })).toBeInTheDocument();
+    expect(screen.queryAllByText(/Let's Talk!/i)).toHaveLength(2);
 
-		const aboutButton = screen.getByText(/I'm Bassem/i);
-		expect(aboutButton).toBeInTheDocument();
-		user.click(aboutButton);
+    const aboutButton = screen.getByText(/I'm Bassem/i);
+    expect(aboutButton).toBeInTheDocument();
+    user.click(aboutButton);
 
-		await waitFor(() => {
-			screen.getByText(/About/i);
-		});
-	});
+    await waitFor(() => {
+      screen.getByText(/About/i);
+    });
+  });
 });
