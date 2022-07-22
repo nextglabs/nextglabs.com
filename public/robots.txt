@@ -1,7 +1,9 @@
+# *
+User-agent: *
+Allow: /
 
-    # AUTOMATICALLY GENERATED, DO NOT EDIT
-    Sitemap: https://nextglabs.com/sitemap.xml
+# Host
+Host: https://nextglabs.com
 
-    User-agent: *
-    Allow: /*
-  
+# Sitemaps
+Sitemap: https://nextglabs.com/sitemap.xml
