@@ -6,11 +6,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(401).json({ message: "Invalid token" });
   }
 
-  const payload = JSON.parse(req?.body || "");
-  console.log(payload.data.slug);
+  if (!req.body) {
+    return res.status(422).json({ message: "Invalid request body" });
+  }
 
   try {
-    await res.revalidate(payload.data.slug);
+    await res.revalidate(req.body.data.slug);
     return res.json({ revalidated: true });
   } catch (err) {
     return res.status(500).send("Error revalidating");
