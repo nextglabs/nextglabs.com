@@ -23,7 +23,7 @@
     "graphql-request": "^3.4.0",
     "intersection-observer": "^0.12.0",
     "next": "latest",
-    "next-mdx-remote": "^3.0.7",
+    "next-mdx-remote": "^4.1.0",
     "next-seo": "^4.26.0",
     "pluralize": "^8.0.0",
     "react": "^17.0.2",
