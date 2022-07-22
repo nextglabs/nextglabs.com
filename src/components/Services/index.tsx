@@ -20,7 +20,7 @@ export const Services = () => {
     {
       title: "FullStack Development ",
       description:
-        "Modern browsers offer a lot of possibilities but also demand for a specialized approach. I translate designs to production ready HTML, CSS and Javascript/Typescript.",
+        "Modern browsers offer a lot of possibilities but also demand for a specialized approach. I translate designs to production ready HTML, CSS and JavaScript/TypeScript.",
       icon: <AppDevelopmentIcon />,
     },
     {
