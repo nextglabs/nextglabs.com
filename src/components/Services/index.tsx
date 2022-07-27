@@ -51,7 +51,7 @@ export const Services = () => {
     <Center id="services">
       <Box w={layoutDimensions.width} my="12">
         <Box pb="12">
-          <Heading as="h3" size="xl">
+          <Heading as="h2" size="xl">
             <span className="underline">Services</span>
           </Heading>
           <Text mt="4" variant="lighter">

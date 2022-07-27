@@ -54,7 +54,7 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
               />
             </a>
           </HoverTransition>
-          <Heading as="h4" size="md">
+          <Heading as="h3" size="md">
             {title}
           </Heading>
           <VStack spacing="0">

@@ -23,7 +23,7 @@ export const ProjectsListItemEmpty = (props: ProjectsListItemEmptyProps) => {
             boxShadow="xl"
             mb="5"
           />
-          <Heading as="h4" size="md">
+          <Heading as="h3" size="md">
             Your project
           </Heading>
           <HStack wrap="wrap" justifyContent="center">

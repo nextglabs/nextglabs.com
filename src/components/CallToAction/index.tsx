@@ -24,7 +24,7 @@ export const CallToAction = () => (
       <Text zIndex="10" transform="translateX(32px) translateY(-28px) rotate(-28deg)" color={useColorModeValue("cyan.600", "cyan.200")}>
         Catcha!
       </Text>
-      <Heading zIndex="10" as="h3" size="xl">
+      <Heading zIndex="10" as="h2" size="xl">
         Got a project?{" "}
         <Text
           as={Link}
