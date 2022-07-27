@@ -1,13 +1,16 @@
 /* eslint-disable react/display-name */
 import { GetStaticPaths, GetStaticProps } from "next";
 import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote } from "next-mdx-remote";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { Box, Center, Heading, Link, Text, VStack, HStack, LinkProps } from "@chakra-ui/react";
 import { fetcher } from "@/config/swr";
 import { GET_PAGES_QUERY } from "@/graphql/queries/getPages";
 import { GET_PAGE_QUERY } from "@/graphql/queries/getPage";
 import React from "react";
 import { Memoji } from "@/components/Memoji";
+import { SITE_URL } from "@/config/seo";
+import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 
 const components = {
   h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -31,21 +34,35 @@ interface IPage {
   id: string;
   slug: string;
   title: string;
+  description?: string | null;
   content: string;
 }
 
-export default function Page({ page }) {
+interface PageProps {
+  page: Pick<IPage, "title" | "description"> & {
+    content: MDXRemoteSerializeResult;
+  };
+}
+
+export default function Page({ page }: PageProps) {
+  const router = useRouter();
+  const pageTitle = `${page.title} - NextGLabs`;
+  const pageUrl = `${SITE_URL}${router.asPath}`;
+
   return (
-    <Center>
-      <Box px={0} maxW="container.md" textAlign="left">
-        <Heading as="h2" size="xl" mb="8">
-          <span className="underline">{page.title}</span>
-        </Heading>
-        <VStack spacing="8" alignItems="flex-start">
-          <MDXRemote {...page.content} components={components} />
-        </VStack>
-      </Box>
-    </Center>
+    <>
+      <NextSeo title={pageTitle} description={page?.description} canonical={pageUrl} openGraph={{ url: pageUrl, title: pageTitle }} />
+      <Center>
+        <Box px={0} maxW="container.md" textAlign="left">
+          <Heading as="h1" size="xl" mb="8">
+            <span className="underline">{page.title}</span>
+          </Heading>
+          <VStack spacing="8" alignItems="flex-start">
+            <MDXRemote {...page.content} components={components} />
+          </VStack>
+        </Box>
+      </Center>
+    </>
   );
 }
 
@@ -69,6 +86,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
       page: {
         content: mdx,
         title: data.page.title,
+        description: data.page?.description || null,
       },
     },
   };
