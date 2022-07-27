@@ -15,7 +15,7 @@ export const ServicesListItem = (props: ServicesListItemProps) => {
       <Box maxW="md" textAlign="center">
         <VStack>
           <Box>{service.icon}</Box>
-          <Text fontSize="xl" fontWeight="bold">
+          <Text as="h4" fontSize="xl" fontWeight="bold">
             {service.title}
           </Text>
           <Text>{service.description}</Text>
