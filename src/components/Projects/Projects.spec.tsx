@@ -67,21 +67,21 @@ describe("<ProjectsListItem />", () => {
 
 describe("<ProjectListItemLinks />", () => {
   it("Links to correct urls", () => {
-    render(<ProjectLinks urls={{ liveUrl: data.liveUrl, githubUrl: data.githubUrl }} />);
+    render(<ProjectLinks title="Test" urls={{ liveUrl: data.liveUrl, githubUrl: data.githubUrl }} />);
     expect(screen.getByText(/github/i)).toHaveAttribute("href", data.githubUrl);
     expect(screen.getByText(/live/i)).toHaveAttribute("href", data.liveUrl);
   });
 
   it("Only shows given urls", () => {
-    const { rerender } = render(<ProjectLinks urls={{ liveUrl: data.liveUrl }} />);
+    const { rerender } = render(<ProjectLinks title="Test" urls={{ liveUrl: data.liveUrl }} />);
     expect(screen.queryByText(/github/i)).not.toBeInTheDocument();
 
-    rerender(<ProjectLinks urls={{ githubUrl: data.githubUrl }} />);
+    rerender(<ProjectLinks title="Test" urls={{ githubUrl: data.githubUrl }} />);
     expect(screen.queryByText(/live/i)).not.toBeInTheDocument();
   });
 
   it("Displays long labels (when `shortLabels={false}`", () => {
-    render(<ProjectLinks urls={{ liveUrl: data.liveUrl, githubUrl: data.githubUrl }} shortLabels={false} />);
+    render(<ProjectLinks title="Test" urls={{ liveUrl: data.liveUrl, githubUrl: data.githubUrl }} shortLabels={false} />);
     screen.getByText(/github repository/i);
     screen.getByText(/live website/i);
   });
