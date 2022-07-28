@@ -13,8 +13,13 @@ import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 
 const components = {
+  h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <Heading as="h2" size="md" my="12" textAlign="left" {...props}>
+      <span className="underline">{children}</span>
+    </Heading>
+  ),
   h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Heading as="h3" size="md" my="12" textAlign="left" {...props}>
+    <Heading as="h3" size="sm" my="12" textAlign="left" {...props}>
       <span className="underline">{children}</span>
     </Heading>
   ),
