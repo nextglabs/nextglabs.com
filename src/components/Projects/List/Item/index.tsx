@@ -83,7 +83,7 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
             </Button>
           )}
           <ProjectsListItemModal isOpen={isOpen} onClose={() => handleModalToggle("close")} {...props.data} />
-          <ProjectLinks urls={{ githubUrl, liveUrl }} />
+          <ProjectLinks title={title} urls={{ githubUrl, liveUrl }} />
         </VStack>
       </Box>
     </SlideUpTransition>
