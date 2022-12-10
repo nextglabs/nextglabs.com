@@ -16,4 +16,10 @@ describe("<Footer />", () => {
     expect(link).toHaveAttribute("href", SOCIAL.GITHUB_PORTFOLIO_URL);
     expect(link).toHaveAttribute("target", "_blank");
   });
+
+  it("Links to imprint page", () => {
+    render(<Footer />);
+    const link = screen.getByText(/Imprint/i);
+    expect(link).toHaveAttribute("href", "/imprint");
+  });
 });
