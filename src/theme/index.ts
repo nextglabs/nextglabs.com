@@ -7,16 +7,19 @@ import { styles } from "./styles";
 import { fonts } from "./fonts";
 // Component style overrides
 import { Button, Link, Text } from "./components";
+// Color overrides
+import { colors } from "./colors";
 
 const overrides = {
-	config,
-	styles,
-	fonts,
-	components: {
-		Button,
-		Link,
-		Text,
-	},
+  colors,
+  config,
+  styles,
+  fonts,
+  components: {
+    Button,
+    Link,
+    Text,
+  },
 };
 
 export default extendTheme(overrides);
