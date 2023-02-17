@@ -1,12 +1,14 @@
 import { DefaultSeoProps } from "next-seo";
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "";
-const title = "NextGLabs – Web Design & Software Engineering";
-const site_name = "NextGLabs - Bassem Allani";
-const description = "FullStack software engineer who loves to design and create innovative web solutions.";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nextglabs.com";
+const title = "Professional Web Design, Development & IT Consulting";
+const site_name = "NextGLabs";
+const description =
+  "Experience the future of web design. Our next-generation solutions will help you transform your online presence and stand out from the competition.";
 
 export const configSEO: DefaultSeoProps = {
   title,
+  titleTemplate: "NextGLabs | %s",
   description,
   canonical: SITE_URL,
   openGraph: {
@@ -14,20 +16,15 @@ export const configSEO: DefaultSeoProps = {
     site_name,
     type: "website",
     title,
-    locale: "en-US",
+    locale: "en",
     description,
     images: [
       {
-        url: `${SITE_URL}/assets/images/og-banner.jpg`,
+        url: `${SITE_URL}/assets/images/og-image-en.jpg`,
         alt: title,
         width: 1280,
         height: 720,
       },
     ],
-  },
-  twitter: {
-    site: "@nextglabs",
-    handle: "@nextglabs",
-    cardType: "summary_large_image",
   },
 };

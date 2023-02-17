@@ -1,4 +1,5 @@
 import { Memoji } from "@/components/Memoji";
+import { Seo } from "@/components/Seo";
 import { Team } from "@/components/Team";
 import { SITE_URL } from "@/config/seo";
 import { getPage } from "@/graphql/queries/getPage";
@@ -10,7 +11,6 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -45,28 +45,27 @@ interface PageProps {
   };
 }
 
-export default function Pages({ page }: PageProps) {
+export default function Pages({ page: { title, content } }: PageProps) {
   const router = useRouter();
-  const pageTitle = `${page.title} - NextGLabs`;
   const pageUrl = `${SITE_URL}${router.asPath}`;
 
   return (
     <Layout>
-      <NextSeo
+      <Seo
         // TODO: Use Meta Title instead of page title
-        title={pageTitle}
+        title={title}
         // TODO: Add Meta Description
         // description={page?.description}
         canonical={pageUrl}
-        openGraph={{ url: pageUrl, title: pageTitle }}
+        openGraph={{ url: pageUrl, title }}
       />
       <Center>
         <Box px={0} maxW="container.lg" textAlign="left">
           <Heading as="h1" size="xl" mb="8">
-            <span className="underline">{page.title}</span>
+            <span className="underline">{title}</span>
           </Heading>
           <VStack spacing="8" alignItems="flex-start">
-            <MDXRemote {...page.content} components={components} />
+            <MDXRemote {...content} components={components} />
           </VStack>
         </Box>
       </Center>
