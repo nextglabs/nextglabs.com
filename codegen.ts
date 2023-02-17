@@ -5,7 +5,7 @@ const config: CodegenConfig = {
   schema: process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT,
   documents: ["./src/graphql/queries/**/*.ts"],
   generates: {
-    "src/graphql/schema.ts": {
+    "./src/graphql/generated/": {
       preset: "client",
       plugins: [],
     },
