@@ -1,5 +1,4 @@
 export interface Service {
+  key: string;
   icon: JSX.Element;
-  title: string | JSX.Element;
-  description: string | JSX.Element;
 }
