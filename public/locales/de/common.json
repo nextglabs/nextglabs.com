@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "contact": "Kontakt"
+  },
+  "cta": {
+    "text": "Haben Sie ein Projekt?",
+    "link": "Lass uns reden!"
+  },
+  "footer": {
+    "imprint": "Impressum.",
+    "creation": "Erstellt mit ❤️ mit React und NextJS.",
+    "source": "Quellcode Ansehen."
+  }
+}

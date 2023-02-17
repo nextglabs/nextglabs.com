@@ -1,7 +1,7 @@
 import { SOCIAL } from "@/config/social";
 
 export const NAV = [
-	{ label: "Home", href: "/" },
-	{ label: "About", href: "/about" },
-	{ label: "Contact", href: `mailto:${SOCIAL.EMAIL}` },
+  { label: "nav.home", href: "/" },
+  { label: "nav.about", href: "/about" },
+  { label: "nav.contact", href: `mailto:${SOCIAL.EMAIL}` },
 ];
