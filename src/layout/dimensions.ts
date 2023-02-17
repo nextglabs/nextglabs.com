@@ -1,4 +1,4 @@
 export const layoutDimensions = {
-  width: ["100%", null, "80%"],
+  width: ["100%"],
   px: ["6", null, "16"],
 };
