@@ -1,7 +1,9 @@
 import { SlideUpTransition } from "@/components/ui/animation/Transitions";
 import { SOCIAL } from "@/config/social";
-import { Box, Button, Heading, HStack, Image, Tag, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import { Box, Button, Heading, HStack, Image, Tag, Text, VStack } from "@chakra-ui/react";
+import { Trans, useTranslation } from "next-i18next";
 import { FiGrid } from "react-icons/fi";
+import { Link as ScrollLink } from "react-scroll";
 
 export interface ProjectsListItemEmptyProps {
   /** Animation order */
@@ -9,36 +11,38 @@ export interface ProjectsListItemEmptyProps {
 }
 export const ProjectsListItemEmpty = (props: ProjectsListItemEmptyProps) => {
   const { order = 0 } = props;
-
+  const { t } = useTranslation("home");
   return (
     <SlideUpTransition order={order}>
-      <Box maxW="md" textAlign="center">
+      <Box maxW="xl" textAlign="center">
         <VStack spacing="2">
-          <Image
-            loading="lazy"
-            objectFit="cover"
-            src={useColorModeValue("assets/images/coming-next-dark.jpg", "assets/images/coming-next-light.jpg")}
-            alt="Empty Project Image"
-            rounded="xl"
-            boxShadow="xl"
-            mb="5"
-          />
+          <Image loading="lazy" objectFit="cover" src="assets/images/coming-next.jpg" alt="Empty Project Image" rounded="xl" boxShadow="xl" mb="5" />
           <Heading as="h3" size="md">
-            Your project
+            {t("projects.placeholder.title")}
           </Heading>
           <HStack wrap="wrap" justifyContent="center">
-            <Tag colorScheme="orange">Satisfaction Guaranteed</Tag>
+            <Tag colorScheme="green"> {t("projects.placeholder.tag")}</Tag>
           </HStack>
           <Text variant="lighter" pt="2">
-            Looking for a professional website or application?
-            <br />I am here to help!
+            <Trans t={t} i18nKey="projects.placeholder.description" />
           </Text>
           <VStack spacing="3">
-            <Button colorScheme="cyan" as="a" href="/#services" size="sm" variant="ghost" rightIcon={<FiGrid />}>
-              Services
+            <Button
+              as={ScrollLink}
+              tabIndex={0}
+              smooth="easeInOutCubic"
+              duration={800}
+              colorScheme="primary"
+              to="services"
+              href="/#services"
+              size="sm"
+              variant="ghost"
+              rightIcon={<FiGrid />}
+            >
+              {t("projects.placeholder.viewServices")}
             </Button>
             <Button as="a" href={`mailto:${SOCIAL.EMAIL}`}>
-              Let&apos;s Talk!
+              {t("projects.placeholder.cta")}
             </Button>
           </VStack>
         </VStack>

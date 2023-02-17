@@ -1,25 +1,22 @@
 import {
+  HStack,
+  Icon,
   Modal,
-  ModalOverlay,
-  ModalCloseButton,
-  ModalHeader,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
-  UseDisclosureProps,
-  useColorModeValue,
-  Icon,
+  ModalHeader,
+  ModalOverlay,
   Text,
-  HStack,
+  UseDisclosureProps,
   VStack,
 } from "@chakra-ui/react";
-import { FiGlobe, FiSettings, FiCodesandbox, FiDatabase } from "react-icons/fi";
-import pluralize from "pluralize";
-import { ProjectLinks } from "./Links";
+import { useTranslation } from "next-i18next";
+import { FiCodesandbox, FiDatabase, FiGlobe, FiSettings } from "react-icons/fi";
 import { Project } from "../../types";
+import { ProjectLinks } from "./Links";
 
-const isMulti = (array: string[]) => array.length > 1;
-const formatTitle = (title: string, array: string[]) => (isMulti(array) ? pluralize(title) : title);
 const formatItems = (array: string[]) =>
   array.map((item, index) => (
     <HStack display="inline-flex" key={index}>
@@ -38,25 +35,26 @@ type ProjectsListItemModalProps = UseDisclosureProps & Partial<Project>;
 
 export const ProjectsListItemModal = (props: ProjectsListItemModalProps) => {
   const { isOpen, onClose, languages, frameworks, libraries, databases, title, githubUrl, liveUrl } = props;
+  const { t } = useTranslation("home");
 
   const tree = {
     languages: {
-      title: "Language",
+      key: "languages",
       icon: FiGlobe,
       items: languages,
     },
     frameworks: {
-      title: "Framework",
+      key: "frameworks",
       icon: FiSettings,
       items: frameworks,
     },
     libraries: {
-      title: "Library",
+      key: "libraries",
       icon: FiCodesandbox,
       items: libraries,
     },
     databases: {
-      title: "Database",
+      key: "databases",
       icon: FiDatabase,
       items: databases,
     },
@@ -65,26 +63,28 @@ export const ProjectsListItemModal = (props: ProjectsListItemModalProps) => {
   const filteredTree = Object.values(tree).filter(({ items }) => items && items.length);
   const noStack = !filteredTree.length;
 
-  const iconColor = useColorModeValue("cyan.600", "cyan.200");
-  const modalBgColor = useColorModeValue("", "gray.800");
-
   return (
-    <Modal blockScrollOnMount={false} colorScheme="green" isOpen={isOpen} onClose={onClose} isCentered motionPreset="slideInBottom" size="lg">
+    <Modal blockScrollOnMount colorScheme="green" isOpen={isOpen} onClose={onClose} isCentered motionPreset="slideInBottom" size="lg">
       <ModalOverlay />
-      <ModalContent m="2" bgColor={modalBgColor}>
+      <ModalContent m="2" bgColor="gray.900" borderRadius="10px">
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <VStack spacing="4" align="left">
             {noStack ? (
-              <Text>No Stack has been defined for this project.</Text>
+              <Text>{t("projects.modal.noStack")}</Text>
             ) : (
               filteredTree.map((details, index) => (
-                <HStack key={index}>
-                  <Icon as={details.icon} color={iconColor} />
-                  <Text as="span" fontWeight="500">
-                    {formatTitle(details.title, details.items)}: {formatItems(details.items)}
-                  </Text>
+                <HStack key={index} alignItems="flex-start">
+                  <HStack>
+                    <Icon as={details.icon} color="secondary.200" />
+                    <Text as="span" fontWeight="500">
+                      {t(`projects.modal.${details.key}`, { count: details.items.length })}:
+                    </Text>
+                  </HStack>
+                  <HStack spacing={0} wrap="wrap" alignItems="flex-end">
+                    {formatItems(details.items)}
+                  </HStack>
                 </HStack>
               ))
             )}
