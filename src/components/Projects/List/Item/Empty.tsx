@@ -2,7 +2,7 @@ import { SlideUpTransition } from "@/components/ui/animation/Transitions";
 import { SOCIAL } from "@/config/social";
 import { Box, Button, Heading, HStack, Image, Tag, Text, VStack } from "@chakra-ui/react";
 import { Trans, useTranslation } from "next-i18next";
-import { FiGrid } from "react-icons/fi";
+import { FiArrowRight, FiGrid } from "react-icons/fi";
 import { Link as ScrollLink } from "react-scroll";
 
 export interface ProjectsListItemEmptyProps {
@@ -41,7 +41,7 @@ export const ProjectsListItemEmpty = (props: ProjectsListItemEmptyProps) => {
             >
               {t("projects.placeholder.viewServices")}
             </Button>
-            <Button as="a" href={`mailto:${SOCIAL.EMAIL}`}>
+            <Button as="a" href={`mailto:${SOCIAL.EMAIL}`} rightIcon={<FiArrowRight />}>
               {t("projects.placeholder.cta")}
             </Button>
           </VStack>
