@@ -1,18 +1,16 @@
-import { Box, Flex, HStack, Link, LinkProps, IconButton, useColorModeValue, IconButtonProps } from "@chakra-ui/react";
-import { ThemeModeToggler } from "@/components/ui/ThemeModeToggler";
+import { Box, Flex, HStack, Link, LinkProps, IconButton, IconButtonProps } from "@chakra-ui/react";
 import { HEADER_SOCIAL_ICONS } from "@/config/social";
 import { layoutDimensions } from "../../dimensions";
 import { HeaderNavMobile } from "./Mobile";
 import { HeaderNavDesktop } from "./Desktop";
+import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 
 const NavIcon = (props: IconButtonProps & LinkProps) => (
   <IconButton
     as={Link}
     size="md"
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.900"),
-    }}
+    _hover={{ textDecoration: "none", bg: "whiteAlpha.200" }}
+    _active={{ bg: "whiteAlpha.300" }}
     variant="ghost"
     {...props}
   />
@@ -28,14 +26,14 @@ export interface NavProps {
   isSmall: boolean;
 }
 export const Nav = ({ isSmall = false }: NavProps) => (
-  <Box px={4}>
+  <Box>
     <Flex h={20} alignItems="center" justifyContent="space-between" w={layoutDimensions.width} mx="auto">
       {isSmall ? <HeaderNavMobile /> : <HeaderNavDesktop />}
-      <HStack spacing={4} alignItems="center">
+      <HStack spacing={[2, 4]} alignItems="center" mr={-3}>
         {HEADER_SOCIAL_ICONS.map((icon, index) => (
           <NavIcon key={index} {...icon} />
         ))}
-        <ThemeModeToggler data-testid="theme-mode-toggler" />
+        <LocaleSwitcher />
       </HStack>
     </Flex>
   </Box>
