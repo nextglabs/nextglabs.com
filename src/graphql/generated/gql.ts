@@ -1,6 +1,6 @@
 /* eslint-disable */
-import * as types from './graphql';
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+import * as types from "./graphql";
+import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/core";
 
 /**
  * Map of all GraphQL operations in the project.
@@ -13,9 +13,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n  query getPage($slug: String!, $locale: Locale!) {\n    page(where: { slug: $slug }, locales: [$locale]) {\n      id\n      title\n      content\n      slug\n      locale\n    }\n  }\n": types.GetPageDocument,
-    "\n  query getPages {\n    pages(orderBy: updatedAt_ASC) {\n      id\n      title\n      content\n      slug\n    }\n  }\n": types.GetPagesDocument,
-    "\n  query getProjects {\n    projects(orderBy: updatedAt_ASC) {\n      id\n      title\n      description\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n      }\n\n      updatedAt\n    }\n  }\n": types.GetProjectsDocument,
+  "\n  query getPage($slug: String!, $locale: Locale!) {\n    page(where: { slug: $slug }, locales: [$locale]) {\n      id\n      title\n      body\n      slug\n      locale\n      meta {\n        title\n        description\n        noIndex\n      }\n    }\n  }\n":
+    types.GetPageDocument,
+  "\n  query getPages {\n    pages(orderBy: updatedAt_ASC) {\n      id\n      title\n      content\n      slug\n    }\n  }\n":
+    types.GetPagesDocument,
+  "\n  query getProjects {\n    projects(orderBy: updatedAt_ASC) {\n      id\n      title\n      description\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n      }\n\n      updatedAt\n    }\n  }\n":
+    types.GetProjectsDocument,
 };
 
 /**
@@ -35,18 +38,25 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query getPage($slug: String!, $locale: Locale!) {\n    page(where: { slug: $slug }, locales: [$locale]) {\n      id\n      title\n      content\n      slug\n      locale\n    }\n  }\n"): (typeof documents)["\n  query getPage($slug: String!, $locale: Locale!) {\n    page(where: { slug: $slug }, locales: [$locale]) {\n      id\n      title\n      content\n      slug\n      locale\n    }\n  }\n"];
+export function graphql(
+  source: "\n  query getPage($slug: String!, $locale: Locale!) {\n    page(where: { slug: $slug }, locales: [$locale]) {\n      id\n      title\n      body\n      slug\n      locale\n      meta {\n        title\n        description\n        noIndex\n      }\n    }\n  }\n"
+): (typeof documents)["\n  query getPage($slug: String!, $locale: Locale!) {\n    page(where: { slug: $slug }, locales: [$locale]) {\n      id\n      title\n      body\n      slug\n      locale\n      meta {\n        title\n        description\n        noIndex\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query getPages {\n    pages(orderBy: updatedAt_ASC) {\n      id\n      title\n      content\n      slug\n    }\n  }\n"): (typeof documents)["\n  query getPages {\n    pages(orderBy: updatedAt_ASC) {\n      id\n      title\n      content\n      slug\n    }\n  }\n"];
+export function graphql(
+  source: "\n  query getPages {\n    pages(orderBy: updatedAt_ASC) {\n      id\n      title\n      content\n      slug\n    }\n  }\n"
+): (typeof documents)["\n  query getPages {\n    pages(orderBy: updatedAt_ASC) {\n      id\n      title\n      content\n      slug\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query getProjects {\n    projects(orderBy: updatedAt_ASC) {\n      id\n      title\n      description\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n      }\n\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  query getProjects {\n    projects(orderBy: updatedAt_ASC) {\n      id\n      title\n      description\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n      }\n\n      updatedAt\n    }\n  }\n"];
+export function graphql(
+  source: "\n  query getProjects {\n    projects(orderBy: updatedAt_ASC) {\n      id\n      title\n      description\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n      }\n\n      updatedAt\n    }\n  }\n"
+): (typeof documents)["\n  query getProjects {\n    projects(orderBy: updatedAt_ASC) {\n      id\n      title\n      description\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n      }\n\n      updatedAt\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> =
+  TDocumentNode extends DocumentNode<infer TType, any> ? TType : never;

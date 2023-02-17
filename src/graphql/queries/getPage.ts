@@ -7,9 +7,20 @@ export const GET_PAGE_QUERY = gql`
     page(where: { slug: $slug }, locales: [$locale]) {
       id
       title
-      content
+      body
       slug
       locale
+      meta {
+        title
+        description
+        noIndex
+        ogImage {
+          url
+          width
+          height
+          alt
+        }
+      }
     }
   }
 `;

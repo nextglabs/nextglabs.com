@@ -40,24 +40,22 @@ const components = {
 };
 
 interface PageProps {
-  page: Pick<IPage, "title"> & {
-    content: MDXRemoteSerializeResult;
-  };
+  page: IPage & { mdx: MDXRemoteSerializeResult };
 }
 
-export default function Pages({ page: { title, content } }: PageProps) {
+export default function Pages({ page: { title, mdx, meta } }: PageProps) {
   const router = useRouter();
   const pageUrl = `${SITE_URL}${router.asPath}`;
+  const { title: metaTitle, description: metaDescription, ogImage } = meta;
 
+  const seoTitle = metaTitle || title;
   return (
     <Layout>
       <Seo
-        // TODO: Use Meta Title instead of page title
-        title={title}
-        // TODO: Add Meta Description
-        // description={page?.description}
+        title={seoTitle}
+        description={metaDescription}
         canonical={pageUrl}
-        openGraph={{ url: pageUrl, title }}
+        openGraph={{ url: pageUrl, title: seoTitle, images: ogImage && [ogImage] }}
       />
       <Center>
         <Box px={0} maxW="container.lg" textAlign="left">
@@ -65,7 +63,7 @@ export default function Pages({ page: { title, content } }: PageProps) {
             <span className="underline">{title}</span>
           </Heading>
           <VStack spacing="8" alignItems="flex-start">
-            <MDXRemote {...content} components={components} />
+            <MDXRemote {...mdx} components={components} />
           </VStack>
         </Box>
       </Center>
@@ -94,14 +92,13 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug }, locale 
     if (!data.page) return { notFound: true };
   }
 
-  const mdx = await serialize(data.page.content);
+  const mdx = await serialize(data.page.body);
 
   return {
     props: {
       page: {
-        content: mdx,
-        title: data.page.title,
-        // description: data.page?.description || null,
+        ...data.page,
+        mdx,
       },
       ...(await serverSideTranslations(locale || "en", ["common"])),
     },
