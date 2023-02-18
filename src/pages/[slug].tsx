@@ -46,7 +46,7 @@ interface PageProps {
 export default function Pages({ page: { title, mdx, meta } }: PageProps) {
   const router = useRouter();
   const pageUrl = `${SITE_URL}${router.asPath}`;
-  const { title: metaTitle, description: metaDescription, ogImage } = meta;
+  const { title: metaTitle, description: metaDescription, ogImage } = meta || {};
 
   const seoTitle = metaTitle || title;
   return (
