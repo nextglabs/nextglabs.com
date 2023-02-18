@@ -32,7 +32,7 @@ const Index = ({ projects }: IndexProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const { projects } = await getProjects();
+  const { projects } = await getProjects(locale);
   return {
     props: {
       projects,

@@ -1414,6 +1414,7 @@ export enum Frameworks {
   ReactNative = "ReactNative",
   SwiftUi = "SwiftUI",
   VueJs = "VueJS",
+  WebFlow = "WebFlow",
   WordPress = "WordPress",
 }
 
@@ -1464,6 +1465,7 @@ export enum Libraries {
   GatsbyJs = "GatsbyJS",
   GraphQl = "GraphQL",
   Jest = "Jest",
+  MapboxGl = "MapboxGL",
   MaterialUi = "MaterialUI",
   Parse = "Parse",
   React = "React",
@@ -1475,6 +1477,7 @@ export enum Libraries {
   Storybook = "Storybook",
   TailwindCss = "TailwindCSS",
   TestingLibrary = "TestingLibrary",
+  Vite = "Vite",
   Webpack = "Webpack",
   WooCommerce = "WooCommerce",
   JQuery = "jQuery",
@@ -1867,8 +1870,11 @@ export type MutationPublishManyPagesConnectionArgs = {
 };
 
 export type MutationPublishManyProjectsArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+  publishBase?: InputMaybe<Scalars["Boolean"]>;
   to?: Array<Stage>;
   where?: InputMaybe<ProjectManyWhereInput>;
+  withDefaultLocale?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type MutationPublishManyProjectsConnectionArgs = {
@@ -1877,9 +1883,12 @@ export type MutationPublishManyProjectsConnectionArgs = {
   first?: InputMaybe<Scalars["Int"]>;
   from?: InputMaybe<Stage>;
   last?: InputMaybe<Scalars["Int"]>;
+  locales?: InputMaybe<Array<Locale>>;
+  publishBase?: InputMaybe<Scalars["Boolean"]>;
   skip?: InputMaybe<Scalars["Int"]>;
   to?: Array<Stage>;
   where?: InputMaybe<ProjectManyWhereInput>;
+  withDefaultLocale?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type MutationPublishPageArgs = {
@@ -1891,8 +1900,11 @@ export type MutationPublishPageArgs = {
 };
 
 export type MutationPublishProjectArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+  publishBase?: InputMaybe<Scalars["Boolean"]>;
   to?: Array<Stage>;
   where: ProjectWhereUniqueInput;
+  withDefaultLocale?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type MutationSchedulePublishArticleArgs = {
@@ -1923,10 +1935,13 @@ export type MutationSchedulePublishPageArgs = {
 };
 
 export type MutationSchedulePublishProjectArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+  publishBase?: InputMaybe<Scalars["Boolean"]>;
   releaseAt?: InputMaybe<Scalars["DateTime"]>;
   releaseId?: InputMaybe<Scalars["String"]>;
   to?: Array<Stage>;
   where: ProjectWhereUniqueInput;
+  withDefaultLocale?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type MutationScheduleUnpublishArticleArgs = {
@@ -1956,8 +1971,10 @@ export type MutationScheduleUnpublishPageArgs = {
 
 export type MutationScheduleUnpublishProjectArgs = {
   from?: Array<Stage>;
+  locales?: InputMaybe<Array<Locale>>;
   releaseAt?: InputMaybe<Scalars["DateTime"]>;
   releaseId?: InputMaybe<Scalars["String"]>;
+  unpublishBase?: InputMaybe<Scalars["Boolean"]>;
   where: ProjectWhereUniqueInput;
 };
 
@@ -2031,6 +2048,8 @@ export type MutationUnpublishManyPagesConnectionArgs = {
 
 export type MutationUnpublishManyProjectsArgs = {
   from?: Array<Stage>;
+  locales?: InputMaybe<Array<Locale>>;
+  unpublishBase?: InputMaybe<Scalars["Boolean"]>;
   where?: InputMaybe<ProjectManyWhereInput>;
 };
 
@@ -2040,8 +2059,10 @@ export type MutationUnpublishManyProjectsConnectionArgs = {
   first?: InputMaybe<Scalars["Int"]>;
   from?: Array<Stage>;
   last?: InputMaybe<Scalars["Int"]>;
+  locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars["Int"]>;
   stage?: InputMaybe<Stage>;
+  unpublishBase?: InputMaybe<Scalars["Boolean"]>;
   where?: InputMaybe<ProjectManyWhereInput>;
 };
 
@@ -2054,6 +2075,8 @@ export type MutationUnpublishPageArgs = {
 
 export type MutationUnpublishProjectArgs = {
   from?: Array<Stage>;
+  locales?: InputMaybe<Array<Locale>>;
+  unpublishBase?: InputMaybe<Scalars["Boolean"]>;
   where: ProjectWhereUniqueInput;
 };
 
@@ -2814,7 +2837,7 @@ export type Project = Node & {
   createdBy?: Maybe<User>;
   databases: Array<Databases>;
   /** Project description */
-  description: Scalars["String"];
+  description?: Maybe<Scalars["String"]>;
   /** Get the document in other stages */
   documentInStages: Array<Project>;
   featuredImage: Asset;
@@ -2827,6 +2850,10 @@ export type Project = Node & {
   languages: Array<Languages>;
   libraries: Array<Libraries>;
   liveUrl?: Maybe<Scalars["String"]>;
+  /** System Locale field */
+  locale: Locale;
+  /** Get the other localizations for this document */
+  localizations: Array<Project>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars["DateTime"]>;
   /** User that last published this document */
@@ -2839,6 +2866,10 @@ export type Project = Node & {
   updatedAt: Scalars["DateTime"];
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
+};
+
+export type ProjectCreatedAtArgs = {
+  variation?: SystemDateTimeFieldVariation;
 };
 
 export type ProjectCreatedByArgs = {
@@ -2863,6 +2894,15 @@ export type ProjectHistoryArgs = {
   stageOverride?: InputMaybe<Stage>;
 };
 
+export type ProjectLocalizationsArgs = {
+  includeCurrent?: Scalars["Boolean"];
+  locales?: Array<Locale>;
+};
+
+export type ProjectPublishedAtArgs = {
+  variation?: SystemDateTimeFieldVariation;
+};
+
 export type ProjectPublishedByArgs = {
   forceParentLocale?: InputMaybe<Scalars["Boolean"]>;
   locales?: InputMaybe<Array<Locale>>;
@@ -2877,6 +2917,10 @@ export type ProjectScheduledInArgs = {
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars["Int"]>;
   where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+export type ProjectUpdatedAtArgs = {
+  variation?: SystemDateTimeFieldVariation;
 };
 
 export type ProjectUpdatedByArgs = {
@@ -2905,15 +2949,35 @@ export type ProjectCreateInput = {
   categories?: InputMaybe<Array<Categories>>;
   createdAt?: InputMaybe<Scalars["DateTime"]>;
   databases?: InputMaybe<Array<Databases>>;
-  description: Scalars["String"];
+  /** description input for default locale (en) */
+  description?: InputMaybe<Scalars["String"]>;
   featuredImage: AssetCreateOneInlineInput;
   frameworks?: InputMaybe<Array<Frameworks>>;
   githubUrl?: InputMaybe<Scalars["String"]>;
   languages?: InputMaybe<Array<Languages>>;
   libraries?: InputMaybe<Array<Libraries>>;
   liveUrl?: InputMaybe<Scalars["String"]>;
+  /** Inline mutations for managing document localizations excluding the default locale */
+  localizations?: InputMaybe<ProjectCreateLocalizationsInput>;
   title: Scalars["String"];
   updatedAt?: InputMaybe<Scalars["DateTime"]>;
+};
+
+export type ProjectCreateLocalizationDataInput = {
+  createdAt?: InputMaybe<Scalars["DateTime"]>;
+  description?: InputMaybe<Scalars["String"]>;
+  updatedAt?: InputMaybe<Scalars["DateTime"]>;
+};
+
+export type ProjectCreateLocalizationInput = {
+  /** Localization input */
+  data: ProjectCreateLocalizationDataInput;
+  locale: Locale;
+};
+
+export type ProjectCreateLocalizationsInput = {
+  /** Create localizations for the newly-created document */
+  create?: InputMaybe<Array<ProjectCreateLocalizationInput>>;
 };
 
 export type ProjectCreateManyInlineInput = {
@@ -2985,25 +3049,6 @@ export type ProjectManyWhereInput = {
   databases_contains_some?: InputMaybe<Array<Databases>>;
   /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
   databases_not?: InputMaybe<Array<Databases>>;
-  description?: InputMaybe<Scalars["String"]>;
-  /** All values containing the given string. */
-  description_contains?: InputMaybe<Scalars["String"]>;
-  /** All values ending with the given string. */
-  description_ends_with?: InputMaybe<Scalars["String"]>;
-  /** All values that are contained in given list. */
-  description_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  /** All values that are not equal to given value. */
-  description_not?: InputMaybe<Scalars["String"]>;
-  /** All values not containing the given string. */
-  description_not_contains?: InputMaybe<Scalars["String"]>;
-  /** All values not ending with the given string */
-  description_not_ends_with?: InputMaybe<Scalars["String"]>;
-  /** All values that are not contained in given list. */
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  /** All values not starting with the given string. */
-  description_not_starts_with?: InputMaybe<Scalars["String"]>;
-  /** All values starting with the given string. */
-  description_starts_with?: InputMaybe<Scalars["String"]>;
   documentInStages_every?: InputMaybe<ProjectWhereStageInput>;
   documentInStages_none?: InputMaybe<ProjectWhereStageInput>;
   documentInStages_some?: InputMaybe<ProjectWhereStageInput>;
@@ -3183,6 +3228,7 @@ export enum ProjectOrderByInput {
 export type ProjectUpdateInput = {
   categories?: InputMaybe<Array<Categories>>;
   databases?: InputMaybe<Array<Databases>>;
+  /** description input for default locale (en) */
   description?: InputMaybe<Scalars["String"]>;
   featuredImage?: InputMaybe<AssetUpdateOneInlineInput>;
   frameworks?: InputMaybe<Array<Frameworks>>;
@@ -3190,7 +3236,28 @@ export type ProjectUpdateInput = {
   languages?: InputMaybe<Array<Languages>>;
   libraries?: InputMaybe<Array<Libraries>>;
   liveUrl?: InputMaybe<Scalars["String"]>;
+  /** Manage document localizations */
+  localizations?: InputMaybe<ProjectUpdateLocalizationsInput>;
   title?: InputMaybe<Scalars["String"]>;
+};
+
+export type ProjectUpdateLocalizationDataInput = {
+  description?: InputMaybe<Scalars["String"]>;
+};
+
+export type ProjectUpdateLocalizationInput = {
+  data: ProjectUpdateLocalizationDataInput;
+  locale: Locale;
+};
+
+export type ProjectUpdateLocalizationsInput = {
+  /** Localizations to create */
+  create?: InputMaybe<Array<ProjectCreateLocalizationInput>>;
+  /** Localizations to delete */
+  delete?: InputMaybe<Array<Locale>>;
+  /** Localizations to update */
+  update?: InputMaybe<Array<ProjectUpdateLocalizationInput>>;
+  upsert?: InputMaybe<Array<ProjectUpsertLocalizationInput>>;
 };
 
 export type ProjectUpdateManyInlineInput = {
@@ -3213,13 +3280,30 @@ export type ProjectUpdateManyInlineInput = {
 export type ProjectUpdateManyInput = {
   categories?: InputMaybe<Array<Categories>>;
   databases?: InputMaybe<Array<Databases>>;
+  /** description input for default locale (en) */
   description?: InputMaybe<Scalars["String"]>;
   frameworks?: InputMaybe<Array<Frameworks>>;
   githubUrl?: InputMaybe<Scalars["String"]>;
   languages?: InputMaybe<Array<Languages>>;
   libraries?: InputMaybe<Array<Libraries>>;
   liveUrl?: InputMaybe<Scalars["String"]>;
+  /** Optional updates to localizations */
+  localizations?: InputMaybe<ProjectUpdateManyLocalizationsInput>;
   title?: InputMaybe<Scalars["String"]>;
+};
+
+export type ProjectUpdateManyLocalizationDataInput = {
+  description?: InputMaybe<Scalars["String"]>;
+};
+
+export type ProjectUpdateManyLocalizationInput = {
+  data: ProjectUpdateManyLocalizationDataInput;
+  locale: Locale;
+};
+
+export type ProjectUpdateManyLocalizationsInput = {
+  /** Localizations to update */
+  update?: InputMaybe<Array<ProjectUpdateManyLocalizationInput>>;
 };
 
 export type ProjectUpdateManyWithNestedWhereInput = {
@@ -3256,6 +3340,12 @@ export type ProjectUpsertInput = {
   create: ProjectCreateInput;
   /** Update document if it exists */
   update: ProjectUpdateInput;
+};
+
+export type ProjectUpsertLocalizationInput = {
+  create: ProjectCreateLocalizationDataInput;
+  locale: Locale;
+  update: ProjectUpdateLocalizationDataInput;
 };
 
 export type ProjectUpsertWithNestedWhereUniqueInput = {
@@ -5777,6 +5867,13 @@ export type GetPageQuery = {
       title: string;
       description: string;
       noIndex?: boolean | null;
+      ogImage?: {
+        __typename?: "Asset";
+        url: string;
+        width?: number | null;
+        height?: number | null;
+        alt?: string | null;
+      } | null;
     } | null;
   } | null;
 };
@@ -5794,7 +5891,9 @@ export type GetPagesQuery = {
   }>;
 };
 
-export type GetProjectsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetProjectsQueryVariables = Exact<{
+  locale: Locale;
+}>;
 
 export type GetProjectsQuery = {
   __typename?: "Query";
@@ -5802,7 +5901,8 @@ export type GetProjectsQuery = {
     __typename?: "Project";
     id: string;
     title: string;
-    description: string;
+    description?: string | null;
+    locale: Locale;
     liveUrl?: string | null;
     githubUrl?: string | null;
     frameworks: Array<Frameworks>;
@@ -5915,6 +6015,31 @@ export const GetPageDocument = {
                         kind: "Field",
                         name: { kind: "Name", value: "noIndex" },
                       },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "ogImage" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "url" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "width" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "height" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "alt" },
+                            },
+                          ],
+                        },
+                      },
                     ],
                   },
                 },
@@ -5968,6 +6093,22 @@ export const GetProjectsDocument = {
       kind: "OperationDefinition",
       operation: "query",
       name: { kind: "Name", value: "getProjects" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "locale" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "Locale" },
+            },
+          },
+        },
+      ],
       selectionSet: {
         kind: "SelectionSet",
         selections: [
@@ -5980,6 +6121,19 @@ export const GetProjectsDocument = {
                 name: { kind: "Name", value: "orderBy" },
                 value: { kind: "EnumValue", value: "updatedAt_ASC" },
               },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "locales" },
+                value: {
+                  kind: "ListValue",
+                  values: [
+                    {
+                      kind: "Variable",
+                      name: { kind: "Name", value: "locale" },
+                    },
+                  ],
+                },
+              },
             ],
             selectionSet: {
               kind: "SelectionSet",
@@ -5987,6 +6141,7 @@ export const GetProjectsDocument = {
                 { kind: "Field", name: { kind: "Name", value: "id" } },
                 { kind: "Field", name: { kind: "Name", value: "title" } },
                 { kind: "Field", name: { kind: "Name", value: "description" } },
+                { kind: "Field", name: { kind: "Name", value: "locale" } },
                 { kind: "Field", name: { kind: "Name", value: "liveUrl" } },
                 { kind: "Field", name: { kind: "Name", value: "githubUrl" } },
                 { kind: "Field", name: { kind: "Name", value: "frameworks" } },
