@@ -50,7 +50,7 @@ describe("<ProjectsListItem />", () => {
   });
 
   it("Hides Stack button when noting to show", () => {
-    render(<ProjectsListItem data={{ title: data.title, description: data.description, featuredImage: data.featuredImage }} />);
+    render(<ProjectsListItem data={{ title: data.title, description: data.description, featuredImage: data.featuredImage } as Project} />);
     expect(screen.queryByRole("button", { name: /Stack/i })).not.toBeInTheDocument();
   });
 
