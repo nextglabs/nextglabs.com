@@ -1,3 +1,4 @@
+import { Project } from "@/graphql/schema";
 import {
   HStack,
   Icon,
@@ -14,7 +15,6 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { FiCodesandbox, FiDatabase, FiGlobe, FiSettings } from "react-icons/fi";
-import { Project } from "../../types";
 import { ProjectLinks } from "./Links";
 
 const formatItems = (array: string[]) =>

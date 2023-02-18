@@ -1,12 +1,18 @@
 import { Button, HStack, Link } from "@chakra-ui/react";
-import { FiExternalLink, FiGithub } from "react-icons/fi";
-import { ProjectUrls } from "../../types";
 import { useTranslation } from "next-i18next";
+import { FiExternalLink, FiGithub } from "react-icons/fi";
+
+export interface ProjectUrls {
+  githubUrl?: string;
+  liveUrl?: string;
+}
+
 interface ProjectLinksProps {
   title: string;
   urls: ProjectUrls;
   shortLabels?: boolean;
 }
+
 export const ProjectLinks = ({ title, urls: { githubUrl, liveUrl }, shortLabels = true }: ProjectLinksProps) => {
   const { t } = useTranslation("home");
   return (

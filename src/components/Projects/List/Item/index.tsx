@@ -3,10 +3,10 @@ import { FiLayers } from "react-icons/fi";
 import { HoverTransition, SlideUpTransition } from "@/components/ui/animation/Transitions";
 import { ProjectsListItemModal } from "./Modal";
 import { ProjectLinks } from "./Links";
-import { Project } from "../../types";
 import { getTagColorScheme, sliceItems } from "../../utils";
 import { useSound } from "@/hooks";
 import { useTranslation } from "next-i18next";
+import { Project } from "@/graphql/schema";
 
 const Tag = (props: BadgeProps) => <Badge my="1" {...props} />;
 
