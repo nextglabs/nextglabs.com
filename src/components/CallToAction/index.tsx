@@ -1,42 +1,51 @@
-import { Center, Flex, Heading, Image, Text, Link, useColorModeValue } from "@chakra-ui/react";
 import { SOCIAL } from "@/config/social";
+import { Box, Heading, Link, Text } from "@chakra-ui/react";
+import NextImage from "next/image";
+import ctaBg from "public/assets/images/cta-bg.jpg";
+import { useTranslation } from "next-i18next";
+import { SlideUpTransition } from "../ui/animation/Transitions";
 
-export const CallToAction = () => (
-  <Center>
-    <Flex mt="200px" mb="100px" py="12" position="relative">
-      <Image
-        width="100%"
-        src={useColorModeValue("assets/images/blob.svg", "assets/images/blob-dark.svg")}
+export const CallToAction = () => {
+  const { t } = useTranslation("common");
+  return (
+    <Box textAlign={["right", null, null, null, null, "center"]} position="relative" style={{ marginBottom: "-50px", marginTop: "-20px" }}>
+      <NextImage
+        src={ctaBg}
         alt="work-with-me"
-        position="absolute"
-        top="-180px"
-        right="200px"
+        placeholder="blur"
+        sizes="100vw"
+        quality={100}
+        fill
+        priority
+        style={{ objectPosition: "30px 0px", objectFit: "cover", zIndex: -1, opacity: 0.8 }}
       />
-      <Image
-        src="assets/images/memoji-celebrate.png"
-        alt="celebrate-together"
-        width="185px"
-        position="absolute"
-        top="-135px"
-        right="150px"
-        transform="scaleX(-1)"
-      />
-      <Text zIndex="10" transform="translateX(32px) translateY(-28px) rotate(-28deg)" color={useColorModeValue("cyan.600", "cyan.200")}>
-        Catcha!
-      </Text>
-      <Heading zIndex="10" as="h2" size="xl">
-        Got a project?{" "}
-        <Text
-          as={Link}
-          href={`mailto:${SOCIAL.EMAIL}`}
-          fontSize="2x-large"
-          fontWeight="bold"
-          textDecoration="underline"
-          _hover={{ color: useColorModeValue("purple.400", "orange.200") }}
+
+      <SlideUpTransition>
+        <Heading
+          zIndex="10"
+          as="h2"
+          size="xl"
+          mt="100px"
+          mb={["100px", null, "200px"]}
+          px={[10, null, 16, 48, 64, 96]}
+          position="relative"
+          top={[3, null, null, null, 16, 24]}
         >
-          Let&apos;s Talk!
-        </Text>
-      </Heading>
-    </Flex>
-  </Center>
-);
+          {t("cta.text")}{" "}
+          <Text
+            as={Link}
+            href={`mailto:${SOCIAL.EMAIL}`}
+            fontSize="2x-large"
+            fontWeight="bold"
+            textDecoration="none"
+            borderBottomWidth="0.15em"
+            borderColor="white"
+            _hover={{ color: "orange.300", borderColor: "orange.300", textDecoration: "none" }}
+          >
+            {t("cta.link")}
+          </Text>
+        </Heading>
+      </SlideUpTransition>
+    </Box>
+  );
+};

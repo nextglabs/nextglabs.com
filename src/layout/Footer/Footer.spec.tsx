@@ -1,5 +1,5 @@
 import { SOCIAL } from "@/config/social";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "@/utils/testUtils";
 import { Footer } from ".";
 
 describe("<Footer />", () => {
@@ -7,19 +7,19 @@ describe("<Footer />", () => {
     render(<Footer />);
     screen.getByText(/Copyright NextGLabs/i);
     screen.getByText(new RegExp(new Date().getFullYear().toString(), "u"));
-    screen.getByText(/Created with ❤️ using React & NextJS/i);
+    screen.getByText("footer.creation");
   });
 
   it("Links to repository", () => {
     render(<Footer />);
-    const link = screen.getByText(/View Source/i);
+    const link = screen.getByText("footer.source");
     expect(link).toHaveAttribute("href", SOCIAL.GITHUB_PORTFOLIO_URL);
     expect(link).toHaveAttribute("target", "_blank");
   });
 
   it("Links to imprint page", () => {
     render(<Footer />);
-    const link = screen.getByText(/Imprint/i);
+    const link = screen.getByText("footer.imprint");
     expect(link).toHaveAttribute("href", "/imprint");
   });
 });

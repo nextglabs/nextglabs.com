@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "cta": {
+    "text": "Got a project?",
+    "link": "Let's Talk!"
+  },
+  "footer": {
+    "imprint": "Impressum.",
+    "creation": "Created with ❤️ using React & NextJS.",
+    "source": "View Source."
+  }
+}

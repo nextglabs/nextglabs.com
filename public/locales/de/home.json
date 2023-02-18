@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "title": "Professionelles Webdesign, Entwicklung & IT-Beratung",
+    "description": "Erleben Sie die Zukunft des Webdesigns. Wir helfen Ihnen, Ihre Online-Präsenz zu transformieren und sich von der Konkurrenz abzuheben."
+  },
+  "hero": {
+    "title": "Starten Sie mit Websites und Apps der nächsten Generation",
+    "subtitle": "Unser erstklassiges Design- und Entwicklungsteam ist bereit, Ihr Online-Spiel zu verbessern. Werden Sie Partner von uns für unübertroffene Qualität und Kundenzufriedenheit. Lassen Sie uns noch heute Ihre Erfolgsgeschichte schreiben!",
+    "buttons": {
+      "primary": "Unsere Projekte",
+      "secondary": "Mehr über uns"
+    }
+  },
+  "projects": {
+    "title": "Projekte",
+    "description": "Ein Blick auf einige der besten kommerziellen Projekte, die wir gebaut haben.",
+    "viewStack": "View Stack",
+    "viewLive": {
+      "short": "Live",
+      "long": "Live Website"
+    },
+    "viewGithub": {
+      "short": "Github",
+      "long": "Github Repository"
+    },
+    "modal": {
+      "noStack": "No Stack has been defined for this project.",
+      "languages_one": "Programmiersprache",
+      "languages_other": "Programmiersprachen",
+      "frameworks_one": "Framework",
+      "frameworks_other": "Frameworks",
+      "libraries_one": "Library",
+      "libraries_other": "Libraries",
+      "databases_one": "Datenbank",
+      "databases_other": "Datenbanken"
+    },
+    "placeholder": {
+      "title": "Ihre Projekt",
+      "tag": "Zufriedenheit Garantiert",
+      "description": "Sie suchen eine professionelle Website oder Anwendung?<br/>Wir helfen Ihnen gerne weiter!",
+      "viewServices": "Unsere Dienstleistungen",
+      "cta": "Lass uns reden"
+    },
+    "notFound": "Entschuldigung, etwas Schreckliches ist passiert und die Projekte konnten nicht geladen werden... 😱"
+  },
+  "services": {
+    "title": "Dienstleistungen",
+    "description": "Einige der Dienstleistungen, die wir derzeit anbieten.",
+    "items": {
+      "webDesign": {
+        "title": "Webdesign",
+        "description": "Ob es sich um die Gestaltung einer neuen Website oder die Auffrischung des Designs einer bestehenden Website handelt. Wir helfen Ihnen dabei, Ihr Projekt ansprechend und benutzerfreundlich zu gestalten."
+      },
+      "webDevelopment": {
+        "title": "Webentwicklung",
+        "description": "Moderne Browser bieten viele Möglichkeiten, erfordern aber auch eine spezialisierte Herangehensweise. Wir übersetzen Designs in produktionsreifes HTML, CSS und JavaScript/TypeScript."
+      },
+      "mobileApps": {
+        "title": "Mobile Apps",
+        "description": "Wir bieten Ihnen ein maßgeschneidertes mobiles App-Design, das auf Ihren Tech-Stack zugeschnitten ist (egal ob Ihre App iOS, Android, React Native ist oder auf einer Webtechnologie basiert)."
+      },
+      "prototyping": {
+        "title": "Prototyping",
+        "description": "Wir helfen Ihnen, interaktive Prototypen Ihrer Web- oder Mobil-App zu erstellen. So können Sie Ihre Ideen mit echten Benutzern testen und wertvolles Feedback erhalten."
+      },
+      "animation": {
+        "title": "Animation",
+        "description": "Wir helfen Ihnen, Ihre Ideen mit wunderschönen Animationen zum Leben zu erwecken. Wir können Ihnen bei allem helfen, von einfachen CSS-Animationen bis hin zu komplexen 3D-Animationen."
+      },
+      "consulting": {
+        "title": "Beratung",
+        "description": "Wir helfen Ihnen, die richtigen Entscheidungen zu treffen, wenn es um Ihre Web- oder mobile App geht. Wir können Ihnen bei allem helfen, von der Auswahl der richtigen Technologie bis zum Aufbau eines Teams."
+      },
+      "seo": {
+        "title": "SEO"
+      },
+      "programming": {
+        "title": "Programmierung"
+      }
+    }
+  }
+}

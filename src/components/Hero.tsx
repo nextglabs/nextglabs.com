@@ -1,30 +1,28 @@
-import NextLink from "next/link";
-import { Button, VStack, Heading, Text, Center, useColorModeValue } from "@chakra-ui/react";
-import { FiArrowRight } from "react-icons/fi";
-import { Memoji } from "@/components/Memoji";
+import { Button, Center, Heading, Text, VStack } from "@chakra-ui/react";
 
-export const Hero = () => (
-  <Center>
-    <VStack spacing="6" textAlign="center" mb="16">
-      <Memoji src={useColorModeValue("assets/images/memoji-victory.png", "assets/images/memoji-thumbs-up.png")} />
-      <Text fontSize="xl" fontWeight="medium" variant="light" lineHeight="shorter">
-        👋🏻 Hi, I&apos;m Bassem.
-      </Text>
-      <Heading as="h1" size="xl" maxWidth="xl" lineHeight="shorter">
-        I build <span className="underline">sophisticated</span> websites and web applications.
-      </Heading>
-      <Text fontSize="md" maxWidth="lg" variant="light" lineHeight="base">
-        I’m a freelance designer and developer. I help companies ship quality software for happy customers. Let&apos;s celebrate your success
-        together!
-      </Text>
-      <NextLink href="#projects">
-        <Button rightIcon={<FiArrowRight />}>See my projects</Button>
-      </NextLink>
-      <NextLink href="/about">
-        <Button variant="link" size="sm">
-          More about me
+import { useTranslation } from "next-i18next";
+import NextLink from "next/link";
+import { FiArrowRight } from "react-icons/fi";
+import { Link as ScrollLink } from "react-scroll";
+
+export const Hero = () => {
+  const { t } = useTranslation("home");
+  return (
+    <Center>
+      <VStack spacing={[6, null, 8]} textAlign="center" py={["20%", null, null, "10%"]}>
+        <Heading as="h1" size={["2xl", null, null, "3xl"]} maxWidth="4xl" lineHeight="shorter">
+          {t("hero.title")}
+        </Heading>
+        <Text fontSize={["lg", null, null, "xl"]} maxWidth="2xl" variant="light" lineHeight="base">
+          {t("hero.subtitle")}
+        </Text>
+        <Button as={ScrollLink} tabIndex={0} smooth="easeInOutCubic" duration={800} href="/#projects" to="projects" rightIcon={<FiArrowRight />}>
+          {t("hero.buttons.primary")}
         </Button>
-      </NextLink>
-    </VStack>
-  </Center>
-);
+        <Button as={NextLink} href="/about" variant="link" size="sm">
+          {t("hero.buttons.secondary")}
+        </Button>
+      </VStack>
+    </Center>
+  );
+};

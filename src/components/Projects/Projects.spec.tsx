@@ -1,15 +1,11 @@
 import { render, screen } from "@/utils/testUtils";
 import { sliceItems } from "@/components/Projects/utils";
-import { useProjects } from "@/hooks/useProjects";
 import { ProjectsListItem } from "./List/Item";
 import { ProjectsListItemModal } from "./List/Item/Modal";
 import { ProjectLinks } from "./List/Item/Links";
 import { ProjectsList } from "./List";
 import { SOCIAL } from "@/config/social";
-
-jest.mock("@/hooks/useProjects");
-
-const mockedUseProject = useProjects as jest.Mock<any>;
+import { Asset, Project } from "@/graphql/schema";
 
 const data = {
   title: "Test Project",
@@ -19,13 +15,13 @@ const data = {
   featuredImage: {
     url: "https://nextglabs.com/image.png",
     alt: "fake-nextglabs-image",
-  },
+  } as Asset,
   categories: ["FullStack", "Design"],
   languages: ["TypeScript", "GraphQL"],
   databases: ["MongoDB", "Postgres"],
   frameworks: ["NextJS", "React"],
   libraries: ["SWR", "Testing Library"],
-};
+} as Project;
 
 describe("<ProjectsListItem />", () => {
   it("Renders project details", () => {
@@ -54,7 +50,7 @@ describe("<ProjectsListItem />", () => {
   });
 
   it("Hides Stack button when noting to show", () => {
-    render(<ProjectsListItem data={{ title: data.title, description: data.description, featuredImage: data.featuredImage }} />);
+    render(<ProjectsListItem data={{ title: data.title, description: data.description, featuredImage: data.featuredImage } as Project} />);
     expect(screen.queryByRole("button", { name: /Stack/i })).not.toBeInTheDocument();
   });
 
@@ -77,13 +73,13 @@ describe("<ProjectListItemLinks />", () => {
     expect(screen.queryByText(/github/i)).not.toBeInTheDocument();
 
     rerender(<ProjectLinks title="Test" urls={{ githubUrl: data.githubUrl }} />);
-    expect(screen.queryByText(/live/i)).not.toBeInTheDocument();
+    expect(screen.queryByText("projects.viewLive.short")).not.toBeInTheDocument();
   });
 
   it("Displays long labels (when `shortLabels={false}`", () => {
     render(<ProjectLinks title="Test" urls={{ liveUrl: data.liveUrl, githubUrl: data.githubUrl }} shortLabels={false} />);
-    screen.getByText(/github repository/i);
-    screen.getByText(/live website/i);
+    screen.getByText("projects.viewGithub.long");
+    screen.getByText("projects.viewLive.long");
   });
 });
 
@@ -95,32 +91,32 @@ describe("<ProjectListItemModal />", () => {
 
   it("Displays no stacks message", () => {
     render(<ProjectsListItemModal isOpen />);
-    screen.getByText(/No Stack has been defined for this project./i);
+    screen.getByText("projects.modal.noStack");
   });
 
   it("Displays only the provided stack items", () => {
     render(<ProjectsListItemModal isOpen databases={data.databases} />);
-    expect(screen.getByText(/databases/i)).toBeInTheDocument();
-    expect(screen.queryByText(/frameworks/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/libraries/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/languages/i)).not.toBeInTheDocument();
+    expect(screen.queryByText("projects.modal.languages:")).not.toBeInTheDocument();
+    expect(screen.queryByText("projects.modal.frameworks:")).not.toBeInTheDocument();
+    expect(screen.queryByText("projects.modal.libraries:")).not.toBeInTheDocument();
+    expect(screen.getByText("projects.modal.databases:")).toBeInTheDocument();
   });
 
-  it("Displays singular label when array contains only 1 item", () => {
+  it("Displays plural label when array contains 0 or more than 1 items", () => {
     const framework = data.frameworks[0];
     const library = data.libraries[0];
     const database = data.databases[0];
     const language = data.languages[0];
     render(<ProjectsListItemModal isOpen frameworks={[framework]} libraries={[library]} databases={[database]} languages={[language]} />);
-    screen.getByText(/framework/i);
-    screen.getByText(/library/i);
-    screen.getByText(/database/i);
-    screen.getByText(/language/i);
+    expect(screen.getByText("projects.modal.languages:")).toBeInTheDocument();
+    expect(screen.getByText("projects.modal.frameworks:")).toBeInTheDocument();
+    expect(screen.getByText("projects.modal.libraries:")).toBeInTheDocument();
+    expect(screen.getByText("projects.modal.databases:")).toBeInTheDocument();
 
-    screen.getByText(framework);
-    screen.getByText(library);
-    screen.getByText(database);
-    screen.getByText(language);
+    expect(screen.getByText(language)).toBeInTheDocument();
+    expect(screen.getByText(framework)).toBeInTheDocument();
+    expect(screen.getByText(library)).toBeInTheDocument();
+    expect(screen.getByText(database)).toBeInTheDocument();
   });
 
   it("Displays stack items", () => {
@@ -136,37 +132,26 @@ describe("<ProjectListItemModal />", () => {
 });
 
 describe("<ProductsList", () => {
-  it("Displays skeleton when fetching projects", () => {
-    mockedUseProject.mockReturnValue({ isLoading: true });
-
-    render(<ProjectsList />);
-    expect(screen.queryAllByTestId("project-skeleton").length).toBe(3);
-  });
-
-  it("Displays error when fetch projects fails", () => {
-    mockedUseProject.mockReturnValue({ isError: true });
-
-    render(<ProjectsList />);
-    screen.getByText(/Sorry, something terrible happened and the projects could not be loaded... 😱/i);
+  it("Displays error when projects are not defined", () => {
+    render(<ProjectsList projects={undefined} />);
+    screen.getByText("projects.notFound");
   });
 
   it("Displays projects when fetch projects succeeds", async () => {
-    mockedUseProject.mockReturnValue({ data: { projects: [data, data] } });
-    render(<ProjectsList />);
+    render(<ProjectsList projects={[data, data]} />);
 
     expect(screen.queryAllByText(data.title).length).toBe(2);
     expect(screen.queryAllByText(data.description).length).toBe(2);
   });
 
   it("Displays coming next project (empty)", () => {
-    mockedUseProject.mockReturnValue({ data: { projects: [data, data] } });
-    render(<ProjectsList />);
+    render(<ProjectsList projects={[data, data]} />);
 
     expect(screen.getByRole("img", { name: /Empty Project Image/i }));
-    expect(screen.getByText(/Your project/i)).toBeInTheDocument();
-    expect(screen.getByText(/Looking for a professional website or application?/i)).toBeInTheDocument();
-    expect(screen.getByText(/I am here to help!/i)).toBeInTheDocument();
-    expect(screen.getByText(/Services/i).closest("a")).toHaveAttribute("href", "/#services");
-    expect(screen.getByText(/Let's Talk/i).closest("a")).toHaveAttribute("href", `mailto:${SOCIAL.EMAIL}`);
+    expect(screen.getByText("projects.placeholder.title")).toBeInTheDocument();
+    expect(screen.getByText("projects.placeholder.tag")).toBeInTheDocument();
+    expect(screen.getByText("projects.placeholder.description")).toBeInTheDocument();
+    expect(screen.getByText("projects.placeholder.viewServices").closest("a")).toHaveAttribute("href", "/#services");
+    expect(screen.getByText("projects.placeholder.cta").closest("a")).toHaveAttribute("href", `mailto:${SOCIAL.EMAIL}`);
   });
 });

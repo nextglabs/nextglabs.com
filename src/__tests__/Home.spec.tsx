@@ -1,27 +1,42 @@
-import user from "@testing-library/user-event";
-import { waitFor, render, screen } from "@/utils/testUtils";
 import HomePage from "@/pages/index";
-import { useInView } from "react-intersection-observer";
-import { useProjects } from "@/hooks/useProjects";
-
-jest.mock("@/hooks/useProjects");
-jest.mock("react-intersection-observer");
-(useProjects as jest.Mock<any>).mockImplementation(() => ({ data: { projects: [] } }));
-(useInView as jest.Mock<any>).mockImplementation(() => [null, true]);
+import { render, screen, within } from "@/utils/testUtils";
 
 describe("HomePage", () => {
-  it("Overall page and navigation work", async () => {
-    render(<HomePage />);
-    expect(screen.getByText(/I'm Bassem/i)).toBeInTheDocument();
-    expect(screen.getByText(/Projects/i, { selector: "span" })).toBeInTheDocument();
-    expect(screen.getAllByText(/Let's Talk!/i)).toHaveLength(2);
+  it("Renders home page elements", async () => {
+    render(<HomePage projects={[]} />);
 
-    const aboutButton = screen.getByText(/I'm Bassem/i);
-    expect(aboutButton).toBeInTheDocument();
-    user.click(aboutButton);
+    // HEADER
+    const header = screen.getByTestId("header");
+    expect(header).toBeVisible();
+    expect(within(header).getByText(/NextGLabs/i)).toBeVisible();
 
-    await waitFor(() => {
-      screen.getByText(/About/i);
-    });
+    // HERO
+    expect(screen.getByText("hero.title")).toBeVisible();
+    expect(screen.getByText("hero.subtitle")).toBeVisible();
+    expect(screen.getByText("hero.buttons.primary")).toBeVisible();
+    expect(screen.getByText("hero.buttons.secondary")).toBeVisible();
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(screen.getByText("hero.buttons.secondary").closest("a")).toHaveAttribute("href", "/about");
+    expect(screen.getByText("cta.link")).toBeInTheDocument();
+
+    // PROJECTS
+    expect(screen.getByText("projects.title")).toBeVisible();
+    expect(screen.getByText("projects.description")).toBeVisible();
+
+    // TICKER
+    expect(screen.getByTestId("ticker")).toBeVisible();
+
+    // SERVICES
+    expect(screen.getByText("services.title")).toBeVisible();
+    expect(screen.getByText("services.description")).toBeVisible();
+
+    // CTA
+    expect(screen.getByText("cta.text")).toBeInTheDocument();
+    expect(screen.getByText("cta.link")).toBeInTheDocument();
+
+    // FOOTER
+    const footer = screen.getByTestId("footer");
+    expect(within(footer).getByText(/Copyright/i)).toBeVisible();
+    expect(within(footer).getByText(/NextGLabs/i)).toBeVisible();
   });
 });

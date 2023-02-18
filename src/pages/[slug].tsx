@@ -1,25 +1,27 @@
-/* eslint-disable react/display-name */
-import { GetStaticPaths, GetStaticProps } from "next";
-import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { Box, Center, Heading, Link, Text, VStack, HStack, LinkProps } from "@chakra-ui/react";
-import { fetcher } from "@/config/swr";
-import { GET_PAGES_QUERY } from "@/graphql/queries/getPages";
-import { GET_PAGE_QUERY } from "@/graphql/queries/getPage";
-import React from "react";
 import { Memoji } from "@/components/Memoji";
+import { Seo } from "@/components/Seo";
+import { Team } from "@/components/Team";
 import { SITE_URL } from "@/config/seo";
+import { getPage } from "@/graphql/queries/getPage";
+import { getPages } from "@/graphql/queries/getPages";
+import { Page as IPage } from "@/graphql/schema";
+import { Layout } from "@/layout";
+import { Box, Center, Heading, HStack, Link, LinkProps, Text, VStack } from "@chakra-ui/react";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
 import { useRouter } from "next/router";
-import { NextSeo } from "next-seo";
+import React from "react";
 
 const components = {
   h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Heading as="h2" size="md" my="12" textAlign="left" {...props}>
+    <Heading as="h2" size="lg" my="12" textAlign="left" {...props}>
       <span className="underline">{children}</span>
     </Heading>
   ),
   h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Heading as="h3" size="sm" my="12" textAlign="left" {...props}>
+    <Heading as="h3" size="md" my="12" textAlign="left" {...props}>
       <span className="underline">{children}</span>
     </Heading>
   ),
@@ -29,70 +31,76 @@ const components = {
     </Link>
   ),
   p: Text,
+  Team,
   Text,
   HStack,
   VStack,
   Memoji,
+  Heading,
 };
 
-interface IPage {
-  id: string;
-  slug: string;
-  title: string;
-  description?: string | null;
-  content: string;
-}
-
 interface PageProps {
-  page: Pick<IPage, "title" | "description"> & {
-    content: MDXRemoteSerializeResult;
-  };
+  page: IPage & { mdx: MDXRemoteSerializeResult };
 }
 
-export default function Page({ page }: PageProps) {
+export default function Pages({ page: { title, mdx, meta } }: PageProps) {
   const router = useRouter();
-  const pageTitle = `${page.title} - NextGLabs`;
   const pageUrl = `${SITE_URL}${router.asPath}`;
+  const { title: metaTitle, description: metaDescription, ogImage } = meta || {};
 
+  const seoTitle = metaTitle || title;
   return (
-    <>
-      <NextSeo title={pageTitle} description={page?.description} canonical={pageUrl} openGraph={{ url: pageUrl, title: pageTitle }} />
+    <Layout>
+      <Seo
+        title={seoTitle}
+        description={metaDescription}
+        canonical={pageUrl}
+        openGraph={{ url: pageUrl, title: seoTitle, images: ogImage && [ogImage] }}
+      />
       <Center>
-        <Box px={0} maxW="container.md" textAlign="left">
+        <Box px={0} maxW="container.lg" textAlign="left">
           <Heading as="h1" size="xl" mb="8">
-            <span className="underline">{page.title}</span>
+            <span className="underline">{title}</span>
           </Heading>
           <VStack spacing="8" alignItems="flex-start">
-            <MDXRemote {...page.content} components={components} />
+            <MDXRemote {...mdx} components={components} />
           </VStack>
         </Box>
       </Center>
-    </>
+    </Layout>
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const { pages } = await fetcher(GET_PAGES_QUERY);
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  const { pages } = await getPages();
+
+  // Get the paths we want to pre-render for every locale
+  const paths = locales.flatMap((locale) => pages.map(({ slug }) => ({ params: { slug }, locale }))) || [];
+
   return {
-    paths: pages.map(({ slug }) => ({ params: { slug } })),
+    paths,
     fallback: "blocking",
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
-  const data: { page: IPage | null } = await fetcher(GET_PAGE_QUERY, { slug });
+export const getStaticProps: GetStaticProps = async ({ params: { slug }, locale }) => {
+  let data = await getPage(slug, locale);
 
-  if (!data.page) return { notFound: true };
+  // Try to get the page in the base language
+  if (!data.page) {
+    data = await getPage(slug, "en");
+    if (!data.page) return { notFound: true };
+  }
 
-  const mdx = await serialize(data.page.content);
+  const mdx = await serialize(data.page.body);
 
   return {
     props: {
       page: {
-        content: mdx,
-        title: data.page.title,
-        description: data.page?.description || null,
+        ...data.page,
+        mdx,
       },
+      ...(await serverSideTranslations(locale || "en", ["common"])),
     },
   };
 };

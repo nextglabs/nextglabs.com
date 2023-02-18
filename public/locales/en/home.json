@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "title": "Professional Web Design, Development & IT Consulting",
+    "description": "Experience the future of web design. Our next-generation solutions will help you transform your online presence and stand out from the competition."
+  },
+  "hero": {
+    "title": "Launch into the future with next generation websites & apps",
+    "subtitle": "Our elite design & development team is ready to elevate your online game. Partner with us for unmatched quality and customer delight. Let's make your success story today!",
+    "buttons": {
+      "primary": "See our projects",
+      "secondary": "More about us"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "A glimpse of some of the best commercial projects we have built.",
+    "viewStack": "View Stack",
+    "viewLive": {
+      "short": "Live",
+      "long": "Live Website"
+    },
+    "viewGithub": {
+      "short": "Github",
+      "long": "Github Repository"
+    },
+    "modal": {
+      "noStack": "No Stack has been defined for this project.",
+      "languages_one": "Language",
+      "languages_other": "Languages",
+      "frameworks_one": "Framework",
+      "frameworks_other": "Frameworks",
+      "libraries_one": "Library",
+      "libraries_other": "Libraries",
+      "databases_one": "Database",
+      "databases_other": "Databases"
+    },
+    "placeholder": {
+      "title": "Your Project",
+      "tag": "Satisfaction Guaranteed",
+      "description": "Looking for a professional website or application?<br/>We are here to help!",
+      "viewServices": "Our Services",
+      "cta": "Let's Talk!"
+    },
+    "notFound": "Sorry, something terrible happened and the projects could not be loaded... 😱"
+  },
+  "services": {
+    "title": "Services",
+    "description": "Some of the services we currently offer.",
+    "items": {
+      "webDesign": {
+        "title": "Web Design",
+        "description": "Whether it's designing a new website or refreshing the design of an existing one. We help you make your project beautiful and easy to use."
+      },
+      "webDevelopment": {
+        "title": "Web Development",
+        "description": "Modern browsers offer a lot of possibilities but also demand for a specialized approach. We translate designs to production-ready HTML, CSS and JavaScript/TypeScript."
+      },
+      "mobileApps": {
+        "title": "Mobile Apps",
+        "description": "We provide you with a custom mobile app design, tailored for your tech-stack (whether your app is iOS, Android, React Native or based on a web technology)."
+      },
+      "prototyping": {
+        "title": "Prototyping",
+        "description": "We help you create interactive prototypes of your web or mobile app. This allows you to test your ideas with real users and get valuable feedback."
+      },
+      "animation": {
+        "title": "Animation",
+        "description": "We help you bring your ideas to life with beautiful animations. We can help you with everything from simple CSS animations to complex 3D animations."
+      },
+      "consulting": {
+        "title": "Consulting",
+        "description": "We help you make the right decisions when it comes to your web or mobile app. We can help you with everything from choosing the right technology to building a team."
+      },
+      "seo": {
+        "title": "SEO"
+      },
+      "programming": {
+        "title": "Programming"
+      }
+    }
+  }
+}

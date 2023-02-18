@@ -1,28 +1,36 @@
+import { fetcher } from "@/config/swr";
 import { gql } from "graphql-request";
+import { Project } from "../schema";
 
 export const GET_PROJECTS_QUERY = gql`
-	query getProjects {
-		projects(orderBy: updatedAt_ASC) {
-			id
-			title
-			description
+  query getProjects($locale: Locale!) {
+    projects(orderBy: updatedAt_ASC, locales: [$locale]) {
+      id
+      title
+      description
+      locale
 
-			liveUrl
-			githubUrl
+      liveUrl
+      githubUrl
 
-			frameworks
-			languages
-			libraries
-			databases
-			categories
+      frameworks
+      languages
+      libraries
+      databases
+      categories
 
-			featuredImage {
-				id
-				url
-				alt
-			}
+      featuredImage {
+        id
+        url
+        alt
+      }
 
-			updatedAt
-		}
-	}
+      updatedAt
+    }
+  }
 `;
+
+interface GetProjectsResponse {
+  projects: Project[] | null;
+}
+export const getProjects = async (locale: string): Promise<GetProjectsResponse> => fetcher<GetProjectsResponse>(GET_PROJECTS_QUERY, { locale });

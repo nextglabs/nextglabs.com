@@ -1,23 +1,21 @@
-import { mode } from "@chakra-ui/theme-tools";
-
 export const styles = {
-  global: (props) => ({
+  global: {
     body: {
-      color: mode("gray.800", "whiteAlpha.900")(props),
-      bg: mode("white", "black")(props),
+      color: "whiteAlpha.900",
+      bg: "black",
       lineHeight: "base",
     },
     ".underline": {
-      padding: "0 8px 10px 6px",
-      backgroundImage: "url('/assets/images/underline.svg')",
-      backgroundPosition: "50% 100%",
-      backgroundSize: "contain",
+      backgroundImage: "linear-gradient(120deg, #5524D0 0%, #E2A166 100%)",
       backgroundRepeat: "no-repeat",
+      backgroundSize: "100% 0.15em",
+      backgroundPosition: "0 100%",
+      paddingBottom: "0.2em",
     },
     li: {
       listStylePosition: "outside",
       marginLeft: "18px",
       marginBottom: "4px",
     },
-  }),
+  },
 };

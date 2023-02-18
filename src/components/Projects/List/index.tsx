@@ -1,16 +1,18 @@
-import { Text, Grid } from "@chakra-ui/react";
-import { useProjects } from "@/hooks";
+import { Project } from "@/graphql/schema";
+import { Grid, Text } from "@chakra-ui/react";
+import { useTranslation } from "next-i18next";
 import { ProjectsListItem } from "./Item";
-import { ProjectsListSkeleton } from "./Skeleton";
 import { ProjectsListItemEmpty } from "./Item/Empty";
 
-export const ProjectsList = () => {
-  const { isLoading, data: { projects = [] } = {}, isError } = useProjects();
-  if (isLoading) return <ProjectsListSkeleton />;
-  if (isError)
+interface ProjectListProps {
+  projects: Project[];
+}
+export const ProjectsList = ({ projects }: ProjectListProps) => {
+  const { t } = useTranslation("home");
+  if (!projects)
     return (
       <Text fontSize="lg" variant="error">
-        Sorry, something terrible happened and the projects could not be loaded... 😱
+        {t("projects.notFound")}
       </Text>
     );
   return (

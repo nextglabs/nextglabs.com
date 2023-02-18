@@ -1,14 +1,34 @@
-import { Grid } from "@chakra-ui/react";
-import { Main } from "./Main";
+import { Box, Grid } from "@chakra-ui/react";
+import Image, { StaticImageData } from "next/image";
+import { layoutDimensions } from "./dimensions";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
+import { Main } from "./Main";
 
-export const Layout = ({ children }) => {
-	return (
-		<Grid gap="6" templateRows="auto 1fr auto" templateColumns="100%" height="100vh">
-			<Header />
-			<Main>{children}</Main>
-			<Footer />
-		</Grid>
-	);
-};
+interface LayoutProps {
+  heroComponent?: React.ReactElement;
+  heroImage?: StaticImageData;
+}
+
+export const Layout = ({ children, heroComponent, heroImage }: React.PropsWithChildren<LayoutProps>) => (
+  <Grid gap="6" templateRows="auto 1fr auto" templateColumns="100%" height="100vh">
+    <Box position="relative">
+      <Header />
+      {heroImage && (
+        <Image
+          src={heroImage}
+          alt="Hero background image"
+          quality={100}
+          fill
+          priority
+          sizes="100vw"
+          placeholder="blur"
+          style={{ objectFit: "cover", zIndex: -1 }}
+        />
+      )}
+      <Box px={layoutDimensions.px}>{heroComponent}</Box>
+    </Box>
+    <Main>{children}</Main>
+    <Footer />
+  </Grid>
+);
