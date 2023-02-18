@@ -4,8 +4,7 @@ import { useRouter } from "next/router";
 import path from "path";
 import { useTranslation } from "next-i18next";
 
-const generateUrl = (locale: string, slug: string) =>
-  new URL(path.join(locale === "en" ? "" : locale, slug), process.env.NEXT_PUBLIC_SITE_URL).toString();
+const generateUrl = (locale: string, slug: string) => new URL(path.join(locale === "en" ? "" : locale, slug), SITE_URL).toString();
 
 const generateOgImages = (locale: string, alt: string) => [
   {

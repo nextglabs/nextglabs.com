@@ -37,6 +37,6 @@ describe("HomePage", () => {
     // FOOTER
     const footer = screen.getByTestId("footer");
     expect(within(footer).getByText(/Copyright/i)).toBeVisible();
-    expect(within(footer).getByText(/NextGlabs/i)).toBeVisible();
+    expect(within(footer).getByText(/NextGLabs/i)).toBeVisible();
   });
 });
