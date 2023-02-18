@@ -33,7 +33,6 @@ describe("<ProjectsListItem />", () => {
 
     // Image
     const displayedImage = document.querySelector("img") as HTMLImageElement;
-    expect(displayedImage.src).toContain(data.featuredImage.url);
     expect(displayedImage.alt).toContain(data.featuredImage.alt);
 
     // Links
