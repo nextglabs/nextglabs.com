@@ -1,12 +1,13 @@
-import { Button, Badge, Box, Heading, HStack, Text, Image, VStack, BadgeProps, useDisclosure } from "@chakra-ui/react";
-import { FiLayers } from "react-icons/fi";
+import { Image } from "@/components/Image";
 import { HoverTransition, SlideUpTransition } from "@/components/ui/animation/Transitions";
-import { ProjectsListItemModal } from "./Modal";
-import { ProjectLinks } from "./Links";
-import { getTagColorScheme, sliceItems } from "../../utils";
-import { useSound } from "@/hooks";
-import { useTranslation } from "next-i18next";
 import { Project } from "@/graphql/schema";
+import { useSound } from "@/hooks";
+import { Badge, BadgeProps, Box, Button, Heading, HStack, Text, useDisclosure, VStack } from "@chakra-ui/react";
+import { useTranslation } from "next-i18next";
+import { FiLayers } from "react-icons/fi";
+import { getTagColorScheme, sliceItems } from "../../utils";
+import { ProjectLinks } from "./Links";
+import { ProjectsListItemModal } from "./Modal";
 
 const Tag = (props: BadgeProps) => <Badge my="1" {...props} />;
 
@@ -42,17 +43,20 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
     <SlideUpTransition order={order}>
       <Box maxW="xl" textAlign="center">
         <VStack spacing="2">
-          <HoverTransition>
-            <a href={liveUrl} target="blank" rel="noopener noreferrer">
-              <Image
-                loading="lazy"
-                objectFit="cover"
-                src={featuredImage?.url}
-                alt={featuredImage?.alt || `${title}-project-image`}
-                rounded="xl"
-                boxShadow="xl"
-                mb="5"
-              />
+          <HoverTransition w="100%">
+            <a href={liveUrl} target="_blank" rel="noopener noreferrer">
+              <Box mb="5" width="100%" position="relative" __css={{ "& .image": { position: "relative!important" } }}>
+                <Image
+                  //@ts-ignore
+                  fill
+                  borderRadius={["lg", null, null, "xl"]}
+                  loading="lazy"
+                  src={featuredImage?.url}
+                  alt={featuredImage?.alt}
+                  sizes="(max-width: 768px) 100vw, (max-width: 991px) 50vw, (max-width: 1200px) 33vw, 100vw"
+                  className="image"
+                />
+              </Box>
             </a>
           </HoverTransition>
           <Heading as="h3" size="md">

@@ -5916,6 +5916,8 @@ export type GetProjectsQuery = {
       id: string;
       url: string;
       alt?: string | null;
+      width?: number | null;
+      height?: number | null;
     };
   }>;
 };
@@ -6158,6 +6160,11 @@ export const GetProjectsDocument = {
                       { kind: "Field", name: { kind: "Name", value: "id" } },
                       { kind: "Field", name: { kind: "Name", value: "url" } },
                       { kind: "Field", name: { kind: "Name", value: "alt" } },
+                      { kind: "Field", name: { kind: "Name", value: "width" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "height" },
+                      },
                     ],
                   },
                 },

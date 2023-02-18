@@ -15,16 +15,7 @@ export const Layout = ({ children, heroComponent, heroImage }: React.PropsWithCh
     <Box position="relative">
       <Header />
       {heroImage && (
-        <Image
-          src={heroImage}
-          alt="Hero background image"
-          quality={100}
-          fill
-          priority
-          sizes="100vw"
-          placeholder="blur"
-          style={{ objectFit: "cover", zIndex: -1 }}
-        />
+        <Image src={heroImage} alt="Hero background image" quality={100} fill priority sizes="100vw" style={{ objectFit: "cover", zIndex: -1 }} />
       )}
       <Box px={layoutDimensions.px}>{heroComponent}</Box>
     </Box>

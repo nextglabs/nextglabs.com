@@ -17,7 +17,7 @@ const documents = {
     types.GetPageDocument,
   "\n  query getPages {\n    pages(orderBy: updatedAt_ASC) {\n      id\n      title\n      content\n      slug\n    }\n  }\n":
     types.GetPagesDocument,
-  "\n  query getProjects($locale: Locale!) {\n    projects(orderBy: updatedAt_ASC, locales: [$locale]) {\n      id\n      title\n      description\n      locale\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n      }\n\n      updatedAt\n    }\n  }\n":
+  "\n  query getProjects($locale: Locale!) {\n    projects(orderBy: updatedAt_ASC, locales: [$locale]) {\n      id\n      title\n      description\n      locale\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n        width\n        height\n      }\n\n      updatedAt\n    }\n  }\n":
     types.GetProjectsDocument,
 };
 
@@ -51,8 +51,8 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "\n  query getProjects($locale: Locale!) {\n    projects(orderBy: updatedAt_ASC, locales: [$locale]) {\n      id\n      title\n      description\n      locale\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n      }\n\n      updatedAt\n    }\n  }\n"
-): (typeof documents)["\n  query getProjects($locale: Locale!) {\n    projects(orderBy: updatedAt_ASC, locales: [$locale]) {\n      id\n      title\n      description\n      locale\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n      }\n\n      updatedAt\n    }\n  }\n"];
+  source: "\n  query getProjects($locale: Locale!) {\n    projects(orderBy: updatedAt_ASC, locales: [$locale]) {\n      id\n      title\n      description\n      locale\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n        width\n        height\n      }\n\n      updatedAt\n    }\n  }\n"
+): (typeof documents)["\n  query getProjects($locale: Locale!) {\n    projects(orderBy: updatedAt_ASC, locales: [$locale]) {\n      id\n      title\n      description\n      locale\n\n      liveUrl\n      githubUrl\n\n      frameworks\n      languages\n      libraries\n      databases\n      categories\n\n      featuredImage {\n        id\n        url\n        alt\n        width\n        height\n      }\n\n      updatedAt\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

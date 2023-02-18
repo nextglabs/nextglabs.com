@@ -23,6 +23,8 @@ export const GET_PROJECTS_QUERY = gql`
         id
         url
         alt
+        width
+        height
       }
 
       updatedAt

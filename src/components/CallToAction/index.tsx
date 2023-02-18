@@ -16,7 +16,6 @@ export const CallToAction = () => {
         sizes="100vw"
         quality={100}
         fill
-        priority
         style={{ objectPosition: "30px 0px", objectFit: "cover", zIndex: -1, opacity: 0.8 }}
       />
 

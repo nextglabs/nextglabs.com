@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { ComponentProps, PropsWithChildren, useEffect } from "react";
 import { useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { MotionBox } from "./Motion";
@@ -29,6 +29,8 @@ export const SlideUpTransition = ({ children, order = 0 }) => {
   );
 };
 
-export const HoverTransition = ({ children }) => {
-  return <MotionBox whileHover={{ translateY: -5 }}>{children}</MotionBox>;
-};
+export const HoverTransition = ({ children, ...props }: PropsWithChildren<ComponentProps<typeof MotionBox>>) => (
+  <MotionBox whileHover={{ translateY: -5 }} {...props}>
+    {children}
+  </MotionBox>
+);
