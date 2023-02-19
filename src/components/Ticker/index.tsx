@@ -24,5 +24,3 @@ export const Ticker = () => {
     </Box>
   );
 };
-
-export default Ticker;

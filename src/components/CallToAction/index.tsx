@@ -13,12 +13,11 @@ export const CallToAction = () => {
         src={ctaBg}
         alt="work-with-me"
         placeholder="blur"
+        loading="lazy"
         sizes="100vw"
-        quality={100}
         fill
         style={{ objectPosition: "30px 0px", objectFit: "cover", zIndex: -1, opacity: 0.8 }}
       />
-
       <SlideUpTransition>
         <Heading
           zIndex="10"

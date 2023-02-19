@@ -26,5 +26,3 @@ export const Projects = ({ projects }: ProjectsProps) => {
     </Center>
   );
 };
-
-export default Projects;

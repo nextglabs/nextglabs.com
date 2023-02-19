@@ -7,11 +7,9 @@ import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import heroImage from "public/assets/images/hero.jpg";
 import { useTranslation } from "next-i18next";
-import dynamic from "next/dynamic";
-
-const Projects = dynamic(() => import("@/components/Projects"), { ssr: false });
-const Services = dynamic(() => import("@/components/Services"), { ssr: false });
-const Ticker = dynamic(() => import("@/components/Ticker"), { ssr: false });
+import { Projects } from "@/components/Projects";
+import { Ticker } from "@/components/Ticker";
+import { Services } from "@/components/Services";
 
 interface IndexProps {
   projects: Project[];
