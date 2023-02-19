@@ -1,18 +1,18 @@
-import { AnimationIcon } from "@/components/Icons/Animation";
-import { AppDevelopmentIcon } from "@/components/Icons/AppDevelopment";
-import { ConsultingIcon } from "@/components/Icons/Consulting";
-import { MobileDesignIcon } from "@/components/Icons/MobileDesign";
-import { PrototypingIcon } from "@/components/Icons/Prototyping";
-import { WebDesignIcon } from "@/components/Icons/WebDesign";
 import { Service } from "@/components/Services/types";
+import animationIcon from "public/assets/icons/animation.svg";
+import bulbIcon from "public/assets/icons/bulb.svg";
+import mobileIcon from "public/assets/icons/mobile.svg";
+import programmingIcon from "public/assets/icons/programming.svg";
+import prototypingIcon from "public/assets/icons/prototyping.svg";
+import webDesignIcon from "public/assets/icons/webdesign.svg";
 
 export const SERVICES: Service[] = [
-  { key: "webDesign", icon: <WebDesignIcon /> },
-  { key: "webDevelopment", icon: <AppDevelopmentIcon /> },
-  { key: "mobileApps", icon: <MobileDesignIcon /> },
-  { key: "prototyping", icon: <PrototypingIcon /> },
-  { key: "animation", icon: <AnimationIcon /> },
-  { key: "consulting", icon: <ConsultingIcon /> },
+  { key: "webDesign", icon: webDesignIcon },
+  { key: "webDevelopment", icon: programmingIcon },
+  { key: "mobileApps", icon: mobileIcon },
+  { key: "prototyping", icon: prototypingIcon },
+  { key: "animation", icon: animationIcon },
+  { key: "consulting", icon: bulbIcon },
 ];
 
 export const TICKER_KEYS = ["webDesign", "programming", "seo", "consulting"];
