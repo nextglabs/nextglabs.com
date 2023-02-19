@@ -1,5 +1,5 @@
-import { fetcher } from "@/config/swr";
-import { gql } from "graphql-request";
+import { fetcher } from "@/config/fetcher";
+import { gql } from "graphql-tag";
 import { Page } from "../schema";
 
 export const GET_PAGE_QUERY = gql`
@@ -25,12 +25,8 @@ export const GET_PAGE_QUERY = gql`
   }
 `;
 
-interface GetPageResponse {
-  page: Page | null;
-}
-
-export const getPage = async (slug: string | string[], locale: string): Promise<GetPageResponse> => {
-  const data = await fetcher<GetPageResponse>(GET_PAGE_QUERY, {
+export const getPage = async (slug: string | string[], locale: string) => {
+  const data = await fetcher<{ page: Page | null }>(GET_PAGE_QUERY, {
     slug,
     locale,
   });

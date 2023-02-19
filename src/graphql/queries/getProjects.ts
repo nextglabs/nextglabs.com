@@ -1,5 +1,5 @@
-import { fetcher } from "@/config/swr";
-import { gql } from "graphql-request";
+import { fetcher } from "@/config/fetcher";
+import { gql } from "graphql-tag";
 import { Project } from "../schema";
 
 export const GET_PROJECTS_QUERY = gql`
@@ -32,7 +32,4 @@ export const GET_PROJECTS_QUERY = gql`
   }
 `;
 
-interface GetProjectsResponse {
-  projects: Project[] | null;
-}
-export const getProjects = async (locale: string): Promise<GetProjectsResponse> => fetcher<GetProjectsResponse>(GET_PROJECTS_QUERY, { locale });
+export const getProjects = async (locale: string) => fetcher<{ projects: Project[] | null }>(GET_PROJECTS_QUERY, { locale });

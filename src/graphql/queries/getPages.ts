@@ -1,5 +1,5 @@
-import { fetcher } from "@/config/swr";
-import { gql } from "graphql-request";
+import { fetcher } from "@/config/fetcher";
+import { gql } from "graphql-tag";
 import { Page } from "../schema";
 
 export const GET_PAGES_QUERY = gql`
@@ -13,7 +13,4 @@ export const GET_PAGES_QUERY = gql`
   }
 `;
 
-interface GetPagesResponse {
-  pages: Page[] | null;
-}
-export const getPages = async (): Promise<GetPagesResponse> => fetcher<GetPagesResponse>(GET_PAGES_QUERY);
+export const getPages = async () => fetcher<{ pages: Page[] | null }>(GET_PAGES_QUERY);
