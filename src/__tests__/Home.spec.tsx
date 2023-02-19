@@ -1,5 +1,5 @@
 import HomePage from "@/pages/index";
-import { render, screen, within } from "@/utils/testUtils";
+import { render, screen, waitFor, within } from "@/utils/testUtils";
 
 describe("HomePage", () => {
   it("Renders home page elements", async () => {
@@ -8,7 +8,9 @@ describe("HomePage", () => {
     // HEADER
     const header = screen.getByTestId("header");
     expect(header).toBeVisible();
-    expect(within(header).getByText(/NextGLabs/i)).toBeVisible();
+    await waitFor(() => {
+      expect(within(header).getByText(/NextGLabs/i)).toBeVisible();
+    });
 
     // HERO
     expect(screen.getByText("hero.title")).toBeVisible();

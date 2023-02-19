@@ -7,12 +7,13 @@ import mockRouter from "next-router-mock";
 
 describe("<Nav />", () => {
   describe(".on mobile", () => {
-    beforeAll(() => {});
-    it("Displays correct items", () => {
+    it("Displays correct items", async () => {
       render(<Nav isSmall />);
 
       // Logo
-      expect(screen.getByRole("link", { name: /nextglabs/i }));
+      await waitFor(() => {
+        expect(screen.getByRole("link", { name: /nextglabs/i }));
+      });
 
       // Menu Toggle
       expect(screen.getByRole("button", { name: /open menu/i })).toBeVisible();
