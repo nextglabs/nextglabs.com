@@ -1,5 +1,4 @@
-import { render, waitFor, screen } from "@/utils/testUtils";
-import user from "@testing-library/user-event";
+import { render, waitFor, screen, fireEvent } from "@/utils/testUtils";
 import { HEADER_SOCIAL_ICONS } from "@/config/social";
 import { NAV } from "@/config/nav";
 import { Nav } from ".";
@@ -33,7 +32,7 @@ describe("<Nav />", () => {
 
       render(<Nav isSmall />);
       const button = screen.getByLabelText(/open menu/i);
-      await user.click(button);
+      fireEvent.click(button);
 
       NAV.forEach(async (item, pageIndex) => {
         await waitFor(() => {
