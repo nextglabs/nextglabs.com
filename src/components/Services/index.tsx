@@ -22,3 +22,5 @@ export const Services = () => {
     </Center>
   );
 };
+
+export default Services;

@@ -22,6 +22,7 @@ const NavLink = ({ label, href, ...restProps }: NavLinkProps) => {
       _hover={{ textDecoration: "initial", borderColor: "whiteAlpha.800" }}
       aria-current={isCurrent ? "page" : undefined}
       href={href}
+      prefetch={false}
       {...restProps}
     >
       <Text fontSize="xs" casing="uppercase">

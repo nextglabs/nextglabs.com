@@ -20,7 +20,7 @@ const NavMenuButton = ({ label, href, ...restProps }: NavMenuButtonProps) => {
   const { t } = useTranslation("common");
   const isCurrent = router.asPath === href;
   return (
-    <MenuItem as={NextLink} href={href} isDisabled={isCurrent} aria-current={isCurrent ? "page" : undefined} {...restProps}>
+    <MenuItem as={NextLink} href={href} isDisabled={isCurrent} aria-current={isCurrent ? "page" : undefined} prefetch={false} {...restProps}>
       {t(label)}
     </MenuItem>
   );
@@ -55,3 +55,5 @@ export const HeaderNavMobile = () => {
     </HStack>
   );
 };
+
+export default HeaderNavMobile;

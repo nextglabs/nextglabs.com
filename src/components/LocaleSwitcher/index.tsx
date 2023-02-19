@@ -28,7 +28,7 @@ export const LocaleSwitcher = () => {
       <MenuButton as={IconButton} size="md" aria-label="Language Options" icon={<FiGlobe />} variant="ghost" />
       <MenuList>
         {locales.map((locale) => (
-          <NextLink key={locale} href={asPath} locale={locale}>
+          <NextLink key={locale} href={asPath} locale={locale} prefetch={false}>
             <MenuItem isDisabled={locale === activeLocale}>{capitalize(languageNames.of(locale) ?? locale)}</MenuItem>
           </NextLink>
         ))}
@@ -36,3 +36,5 @@ export const LocaleSwitcher = () => {
     </Menu>
   );
 };
+
+export default LocaleSwitcher;

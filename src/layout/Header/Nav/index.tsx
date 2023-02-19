@@ -1,9 +1,11 @@
 import { Box, Flex, HStack, Link, LinkProps, IconButton, IconButtonProps } from "@chakra-ui/react";
 import { HEADER_SOCIAL_ICONS } from "@/config/social";
 import { layoutDimensions } from "../../dimensions";
-import { HeaderNavMobile } from "./Mobile";
 import { HeaderNavDesktop } from "./Desktop";
-import { LocaleSwitcher } from "@/components/LocaleSwitcher";
+import dynamic from "next/dynamic";
+
+const LocaleSwitcher = dynamic(() => import("@/components/LocaleSwitcher"));
+const HeaderNavMobile = dynamic(() => import("./Mobile"));
 
 const NavIcon = (props: IconButtonProps & LinkProps) => (
   <IconButton

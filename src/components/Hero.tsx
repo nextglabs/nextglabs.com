@@ -19,7 +19,7 @@ export const Hero = () => {
         <Button as={ScrollLink} tabIndex={0} smooth="easeInOutCubic" duration={800} href="/#projects" to="projects" rightIcon={<FiArrowRight />}>
           {t("hero.buttons.primary")}
         </Button>
-        <Button as={NextLink} href="/about" variant="link" size="sm">
+        <Button as={NextLink} href="/about" variant="link" size="sm" prefetch={false}>
           {t("hero.buttons.secondary")}
         </Button>
       </VStack>

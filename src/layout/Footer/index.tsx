@@ -19,7 +19,7 @@ export const Footer = (props: FlexProps) => {
         <Flex w={layoutDimensions.width} mx="auto" justifyContent="space-between">
           <Text fontSize="sm">
             &copy; Copyright NextGLabs {currentYear}.{" "}
-            <Link as={NextLink} variant="colored" href="/imprint" locale={locale}>
+            <Link as={NextLink} variant="colored" href="/imprint" locale={locale} prefetch={false}>
               {t("footer.imprint")}
             </Link>
           </Text>
