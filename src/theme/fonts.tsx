@@ -1,28 +1,24 @@
 import localFont from "@next/font/local";
-import fontBook from "./fonts/CircularStd-book.woff2";
-import fontMedium from "./fonts/CircularStd-medium.woff2";
-import fontBold from "./fonts/CircularStd-bold.woff2";
-import fontBlack from "./fonts/CircularStd-black.woff2";
 
 const circluarStd = localFont({
   src: [
     {
-      path: fontBook,
+      path: "./fonts/CircularStd-book.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: fontMedium,
+      path: "./fonts/CircularStd-medium.woff2",
       weight: "500",
       style: "medium",
     },
     {
-      path: fontBold,
+      path: "./fonts/CircularStd-bold.woff2",
       weight: "700",
       style: "bold",
     },
     {
-      path: fontBlack,
+      path: "./fonts/CircularStd-bold.woff2",
       weight: "900",
       style: "black",
     },
