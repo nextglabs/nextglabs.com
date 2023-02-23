@@ -1,6 +1,5 @@
 // @ts-check
 const { i18n } = require("./next-i18next.config.js");
-const path = require("path");
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nextglabs.com";
 
@@ -16,27 +15,27 @@ const config = {
       hreflang: "en",
     },
     {
-      href: path.join(SITE_URL, "de"),
+      href: new URL("de", SITE_URL).href,
       hreflang: "de",
     },
   ],
   exclude: ["*404"],
-  transform: async (config, _path) => {
+  transform: async (config, path) => {
     return {
-      loc: _path,
+      loc: path,
       changefreq: config.changefreq,
       priority: config.priority,
       lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
       alternateRefs:
         config.alternateRefs?.map((alternate) => {
           // Ex: try to find '/en/'
-          const hasPathLocale = i18n.locales.indexOf(_path.substring(1, 3)) !== -1;
+          const hasPathLocale = i18n.locales.indexOf(path.substring(1, 3)) !== -1;
           //  Only fix alternateRefs if path has a locale
           return hasPathLocale
             ? {
                 ...alternate,
                 // Note: concat original alternate with  '/en/my-page' => my-page
-                href: path.join(alternate.href, _path.substring(4)),
+                href: new URL(path.substring(4), alternate.href).href,
                 hrefIsAbsolute: true,
               }
             : alternate;
