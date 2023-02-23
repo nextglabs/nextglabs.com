@@ -46,7 +46,7 @@ interface PageProps {
 export default function Pages({ page: { title, mdx, meta } }: PageProps) {
   const router = useRouter();
   const pageUrl = `${SITE_URL}${router.asPath}`;
-  const { title: metaTitle, description: metaDescription, ogImage } = meta || {};
+  const { title: metaTitle, description: metaDescription, ogImage, noIndex } = meta || {};
 
   const seoTitle = metaTitle || title;
   return (
@@ -56,6 +56,7 @@ export default function Pages({ page: { title, mdx, meta } }: PageProps) {
         description={metaDescription}
         canonical={pageUrl}
         openGraph={{ url: pageUrl, title: seoTitle, images: ogImage && [ogImage] }}
+        noindex={noIndex}
       />
       <Center>
         <Box px={0} maxW="container.lg" textAlign="left">
