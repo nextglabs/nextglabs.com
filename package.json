@@ -21,6 +21,7 @@
     "@emotion/styled": "^11.9.3",
     "@next/bundle-analyzer": "^13.1.6",
     "@next/font": "^13.1.6",
+    "@vercel/analytics": "^1.0.0",
     "framer-motion": "^9.0.4",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",
