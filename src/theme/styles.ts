@@ -4,6 +4,7 @@ export const styles = {
       color: "whiteAlpha.900",
       bg: "black",
       lineHeight: "base",
+      colorScheme: "light",
     },
     ".underline": {
       backgroundImage: "linear-gradient(120deg, #5524D0 0%, #E2A166 100%)",
