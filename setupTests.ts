@@ -1,3 +1,4 @@
+import type * as ReactDom from "react-dom";
 import "@testing-library/jest-dom";
 import { useInView } from "react-intersection-observer";
 import mockRouter from "next-router-mock";
@@ -44,3 +45,18 @@ jest.mock("react-i18next", () => ({
 
 jest.mock("react-intersection-observer");
 (useInView as jest.Mock<any>).mockImplementation(() => [null, true]);
+
+// Fixes react-fast-marquee error "ResizeObserver not defined"
+// See: https://github.com/ZeeCoder/use-resize-observer/issues/40
+https: window.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
+// Fixes "Error: Uncaught [TypeError: (0 , _reactdom.preload) is not a function]""
+// See: https://github.com/vercel/next.js/issues/53272
+jest.mock("react-dom", () => ({
+  ...jest.requireActual<typeof ReactDom>("react-dom"),
+  preload: jest.fn(),
+}));
