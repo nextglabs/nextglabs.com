@@ -6,7 +6,16 @@ import { getPage } from "@/graphql/queries/getPage";
 import { getPages } from "@/graphql/queries/getPages";
 import { Page as IPage } from "@/graphql/schema";
 import { Layout } from "@/layout";
-import { Box, Center, Heading, HStack, Link, LinkProps, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Heading,
+  HStack,
+  Link,
+  LinkProps,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
@@ -16,12 +25,12 @@ import React from "react";
 
 const components = {
   h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Heading as="h2" size="lg" my="12" textAlign="left" {...props}>
+    <Heading as="h2" size="lg" textAlign="left" {...props}>
       <span className="underline">{children}</span>
     </Heading>
   ),
   h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Heading as="h3" size="md" my="12" textAlign="left" {...props}>
+    <Heading as="h3" size="md" textAlign="left" {...props}>
       <span className="underline">{children}</span>
     </Heading>
   ),
@@ -46,7 +55,12 @@ interface PageProps {
 export default function Pages({ page: { title, mdx, meta } }: PageProps) {
   const router = useRouter();
   const pageUrl = `${SITE_URL}${router.asPath}`;
-  const { title: metaTitle, description: metaDescription, ogImage, noIndex } = meta || {};
+  const {
+    title: metaTitle,
+    description: metaDescription,
+    ogImage,
+    noIndex,
+  } = meta || {};
 
   const seoTitle = metaTitle || title;
   return (
@@ -55,7 +69,11 @@ export default function Pages({ page: { title, mdx, meta } }: PageProps) {
         title={seoTitle}
         description={metaDescription}
         canonical={pageUrl}
-        openGraph={{ url: pageUrl, title: seoTitle, images: ogImage && [ogImage] }}
+        openGraph={{
+          url: pageUrl,
+          title: seoTitle,
+          images: ogImage && [ogImage],
+        }}
         noindex={noIndex}
       />
       <Center>
@@ -76,7 +94,10 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const { pages } = await getPages();
 
   // Get the paths we want to pre-render for every locale
-  const paths = locales.flatMap((locale) => pages.map(({ slug }) => ({ params: { slug }, locale }))) || [];
+  const paths =
+    locales.flatMap((locale) =>
+      pages.map(({ slug }) => ({ params: { slug }, locale }))
+    ) || [];
 
   return {
     paths,
@@ -84,7 +105,10 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params: { slug }, locale }) => {
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug },
+  locale,
+}) => {
   let data = await getPage(slug, locale);
 
   // Try to get the page in the base language
