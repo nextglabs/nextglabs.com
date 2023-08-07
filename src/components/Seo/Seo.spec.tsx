@@ -1,4 +1,4 @@
-import { render } from "@/utils/testUtils";
+import { render } from "@testing-library/react";
 import { Seo } from ".";
 
 jest.mock("next/head", () => {
