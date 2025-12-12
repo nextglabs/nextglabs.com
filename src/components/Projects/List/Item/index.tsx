@@ -1,8 +1,21 @@
 import { Image } from "@/components/Image";
-import { HoverTransition, SlideUpTransition } from "@/components/ui/animation/Transitions";
+import {
+  HoverTransition,
+  SlideUpTransition,
+} from "@/components/ui/animation/Transitions";
 import { Project } from "@/graphql/schema";
 import { useSound } from "@/hooks";
-import { Badge, BadgeProps, Box, Button, Heading, HStack, Text, useDisclosure, VStack } from "@chakra-ui/react";
+import {
+  Badge,
+  BadgeProps,
+  Box,
+  Button,
+  Heading,
+  HStack,
+  Text,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { FiLayers } from "react-icons/fi";
 import { getTagColorScheme, sliceItems } from "../../utils";
@@ -18,7 +31,17 @@ export interface ProjectsListItemProps {
 }
 export const ProjectsListItem = (props: ProjectsListItemProps) => {
   const {
-    data: { title, description, featuredImage, liveUrl, githubUrl, languages = [], frameworks = [], libraries = [], categories = [] } = {},
+    data: {
+      title,
+      description,
+      featuredImage,
+      liveUrl,
+      githubUrl,
+      languages = [],
+      frameworks = [],
+      libraries = [],
+      categories = [],
+    } = {},
     order = 0,
   } = props;
 
@@ -34,7 +57,10 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
     }
   };
 
-  const { displayedItems, remainingItems } = sliceItems([...frameworks, ...libraries, ...languages], 4);
+  const { displayedItems, remainingItems } = sliceItems(
+    [...frameworks, ...libraries, ...languages],
+    4
+  );
 
   // Display nothing if these required vars are not provided somehow
   if (!title || !description || !featuredImage?.url) return null;
@@ -44,15 +70,24 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
       <Box maxW="xl" textAlign="center">
         <VStack spacing="2">
           <HoverTransition w="100%">
-            <a href={liveUrl} target="_blank" rel="noopener noreferrer">
-              <Box mb="5" width="100%" position="relative" __css={{ "& .image": { position: "relative!important" } }}>
+            <a
+              href={liveUrl ?? undefined}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Box
+                mb="5"
+                width="100%"
+                position="relative"
+                __css={{ "& .image": { position: "relative!important" } }}
+              >
                 <Image
                   //@ts-ignore
                   fill
                   borderRadius={["lg", null, null, "xl"]}
                   loading="lazy"
                   src={featuredImage?.url}
-                  alt={featuredImage?.alt}
+                  alt={featuredImage?.alt ?? "Project Image"}
                   sizes="(max-width: 768px) 100vw, (max-width: 991px) 50vw, 33vw"
                   className="image"
                 />
@@ -65,7 +100,10 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
           <VStack spacing="0">
             <HStack wrap="wrap" justifyContent="center">
               {categories.map((item, index) => (
-                <Tag key={`project-category-${index}`} colorScheme={getTagColorScheme(item)}>
+                <Tag
+                  key={`project-category-${index}`}
+                  colorScheme={getTagColorScheme(item)}
+                >
                   {item}
                 </Tag>
               ))}
@@ -83,12 +121,28 @@ export const ProjectsListItem = (props: ProjectsListItemProps) => {
             {description}
           </Text>
           {displayedItems.length && (
-            <Button onClick={() => handleModalToggle("open")} colorScheme="primary" size="sm" variant="ghost" rightIcon={<FiLayers />}>
+            <Button
+              onClick={() => handleModalToggle("open")}
+              colorScheme="primary"
+              size="sm"
+              variant="ghost"
+              rightIcon={<FiLayers />}
+            >
               {t("projects.viewStack")}
             </Button>
           )}
-          <ProjectsListItemModal isOpen={isOpen} onClose={() => handleModalToggle("close")} {...props.data} />
-          <ProjectLinks title={title} urls={{ githubUrl, liveUrl }} />
+          <ProjectsListItemModal
+            isOpen={isOpen}
+            onClose={() => handleModalToggle("close")}
+            {...props.data}
+          />
+          <ProjectLinks
+            title={title}
+            urls={{
+              githubUrl: githubUrl ?? undefined,
+              liveUrl: liveUrl ?? undefined,
+            }}
+          />
         </VStack>
       </Box>
     </SlideUpTransition>

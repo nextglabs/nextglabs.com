@@ -7,7 +7,7 @@ export const Header = (props: BoxProps) => {
   const isSmall = useBreakpointValue({ base: true, md: false });
   return (
     <Box as="header" px={layoutDimensions.px} zIndex={10} data-testid="header" {...props}>
-      <Nav isSmall={isSmall} />
+      <Nav isSmall={isSmall ?? false} />
     </Box>
   );
 };

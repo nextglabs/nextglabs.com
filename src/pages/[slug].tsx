@@ -12,7 +12,6 @@ import {
   Heading,
   HStack,
   Link,
-  LinkProps,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -23,22 +22,38 @@ import { serialize } from "next-mdx-remote/serialize";
 import { useRouter } from "next/router";
 import React from "react";
 
-const components = {
-  h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Heading as="h2" size="lg" textAlign="left" {...props}>
+const H2Component = (props: { children?: React.ReactNode }) => {
+  const { children } = props;
+  return (
+    <Heading as="h2" size="lg" textAlign="left">
       <span className="underline">{children}</span>
     </Heading>
-  ),
-  h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Heading as="h3" size="md" textAlign="left" {...props}>
+  );
+};
+
+const H3Component = (props: { children?: React.ReactNode }) => {
+  const { children } = props;
+  // @ts-ignore - TypeScript limitation with complex union types in Chakra UI
+  return (
+    <Heading as="h3" size="md" textAlign="left">
       <span className="underline">{children}</span>
     </Heading>
-  ),
-  a: ({ children, href, ...props }: LinkProps) => (
-    <Link href={href} variant="colored" isExternal {...props}>
+  );
+};
+
+const AComponent = (props: { children?: React.ReactNode; href?: string }) => {
+  const { children, href } = props;
+  return (
+    <Link href={href} variant="colored" isExternal>
       {children}
     </Link>
-  ),
+  );
+};
+
+const components: Record<string, React.ComponentType<any>> = {
+  h2: H2Component,
+  h3: H3Component,
+  a: AComponent,
   p: Text,
   Team,
   Text,
@@ -63,6 +78,15 @@ export default function Pages({ page: { title, mdx, meta } }: PageProps) {
   } = meta || {};
 
   const seoTitle = metaTitle || title;
+  const images = ogImage
+    ? (Array.isArray(ogImage) ? ogImage : [ogImage]).map((img) => ({
+        url: img.url,
+        width: img.width ?? undefined,
+        height: img.height ?? undefined,
+        alt: img.alt ?? undefined,
+      }))
+    : undefined;
+
   return (
     <Layout>
       <Seo
@@ -72,9 +96,9 @@ export default function Pages({ page: { title, mdx, meta } }: PageProps) {
         openGraph={{
           url: pageUrl,
           title: seoTitle,
-          images: ogImage && [ogImage],
+          images,
         }}
-        noindex={noIndex}
+        noindex={noIndex ?? undefined}
       />
       <Center>
         <Box px={0} maxW="container.lg" textAlign="left">
@@ -94,10 +118,18 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const { pages } = await getPages();
 
   // Get the paths we want to pre-render for every locale
-  const paths =
-    locales.flatMap((locale) =>
-      pages.map(({ slug }) => ({ params: { slug }, locale }))
-    ) || [];
+  const paths: Array<{ params: { slug: string }; locale: string }> = [];
+  
+  if (locales && pages) {
+    for (const locale of locales) {
+      for (const page of pages) {
+        const slug = page.slug;
+        if (slug && typeof slug === "string") {
+          paths.push({ params: { slug }, locale });
+        }
+      }
+    }
+  }
 
   return {
     paths,
@@ -106,10 +138,16 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({
-  params: { slug },
+  params,
   locale,
 }) => {
-  let data = await getPage(slug, locale);
+  const slug = params?.slug;
+  
+  if (!slug || typeof slug !== "string") {
+    return { notFound: true };
+  }
+
+  let data = await getPage(slug, locale || "en");
 
   // Try to get the page in the base language
   if (!data.page) {
@@ -117,7 +155,12 @@ export const getStaticProps: GetStaticProps = async ({
     if (!data.page) return { notFound: true };
   }
 
-  const mdx = await serialize(data.page.body);
+  const body = data.page.body;
+  if (!body || typeof body !== "string") {
+    return { notFound: true };
+  }
+
+  const mdx = await serialize(body);
 
   return {
     props: {

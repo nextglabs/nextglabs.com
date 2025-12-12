@@ -19,7 +19,7 @@ export const Seo = ({ openGraph = {}, description: descriptionProp, ...props }: 
   const { locales, locale, asPath } = useRouter();
   const { t } = useTranslation("home");
 
-  const description = descriptionProp || t("description");
+  const description = (descriptionProp || t("description")) ?? undefined;
 
   const defaultHrefLang = {
     hrefLang: "x-default",
@@ -32,7 +32,7 @@ export const Seo = ({ openGraph = {}, description: descriptionProp, ...props }: 
       href: generateUrl(locale, asPath),
     })) || [];
 
-  const images = !openGraph.images && generateOgImages(locale, `NextGLabs - ${openGraph.title}` || "NextGLabs");
+  const images = !openGraph.images ? generateOgImages(locale ?? "en", openGraph.title ? `NextGLabs - ${openGraph.title}` : "NextGLabs") : undefined;
   return (
     <NextSeo
       description={description}

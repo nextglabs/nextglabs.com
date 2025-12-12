@@ -8,10 +8,14 @@ interface GraphQlResponse<T extends GraphQlData> {
 }
 
 export async function fetcher<T extends GraphQlData>(query: DocumentNode, variables = {}): Promise<T> {
-  const res = await fetch(process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT, {
+  const endpoint = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
+  if (!endpoint) {
+    throw new Error("NEXT_PUBLIC_GRAPHCMS_ENDPOINT environment variable is not defined");
+  }
+  const res = await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query: query?.loc.source.body, variables }),
+    body: JSON.stringify({ query: query?.loc?.source?.body, variables }),
   });
 
   if (!res.ok) {

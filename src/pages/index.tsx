@@ -32,11 +32,12 @@ const Index = ({ projects }: IndexProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const { projects } = await getProjects(locale);
+  const localeString = locale || "en";
+  const { projects } = await getProjects(localeString);
   return {
     props: {
       projects,
-      ...(await serverSideTranslations(locale, ["common", "home"])),
+      ...(await serverSideTranslations(localeString, ["common", "home"])),
     },
   };
 };

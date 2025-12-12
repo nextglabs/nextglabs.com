@@ -7,7 +7,8 @@ import { FiGlobe } from "react-icons/fi";
 import { MenuItem } from "../Menu/Item";
 import { MenuList } from "../Menu/List";
 
-const capitalize = (lang: string) => lang.slice(0, 1).toUpperCase() + lang.slice(1);
+const capitalize = (lang: string) =>
+  lang.slice(0, 1).toUpperCase() + lang.slice(1);
 
 export const LocaleSwitcher = () => {
   const router = useRouter();
@@ -17,19 +18,27 @@ export const LocaleSwitcher = () => {
 
   const languageNames = useMemo(
     () =>
-      new Intl.DisplayNames([activeLocale], {
+      new Intl.DisplayNames([activeLocale ?? "en"], {
         type: "language",
       }),
-    [activeLocale],
+    [activeLocale]
   );
 
   return (
     <Menu onClose={play} onOpen={play}>
-      <MenuButton as={IconButton} size="md" aria-label="Language Options" icon={<FiGlobe />} variant="ghost" />
+      <MenuButton
+        as={IconButton}
+        size="md"
+        aria-label="Language Options"
+        icon={<FiGlobe />}
+        variant="ghost"
+      />
       <MenuList>
-        {locales.map((locale) => (
+        {locales?.map((locale: string) => (
           <NextLink key={locale} href={asPath} locale={locale} prefetch={false}>
-            <MenuItem isDisabled={locale === activeLocale}>{capitalize(languageNames.of(locale) ?? locale)}</MenuItem>
+            <MenuItem isDisabled={locale === activeLocale}>
+              {capitalize(languageNames.of(locale) ?? locale)}
+            </MenuItem>
           </NextLink>
         ))}
       </MenuList>

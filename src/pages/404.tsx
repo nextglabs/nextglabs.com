@@ -57,7 +57,7 @@ export default function FourOhFour() {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "404"])),
+      ...(await serverSideTranslations(locale || "en", ["common", "404"])),
     },
   };
 };
